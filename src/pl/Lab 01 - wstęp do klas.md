@@ -3,20 +3,20 @@ Wstęp do klas
 
 Proste struktury i funkcje w stylu języka C
 -------------------------------------------
-Do tej pory tworzone na zajęciach struktury zawierały jedynie pola będące zmiennymi różnych typów. Jako przykład można potrakować strukturę `Student`:
+Do tej pory tworzone na zajęciach struktury zawierały jedynie pola będące zmiennymi różnych typów. Jako przykład można potraktować strukturę `Student`:
 ```cpp
 struct Student {
-    std::string name;
-    std::string surname;
-    std::vector<float> grades;
+std::string name;
+std::string surname;
+std::vector<float> grades;
 };
 ```
 
 Zakładając, że chcemy wyliczyć średnią ocen należy napisać odpowiednią funkcję, które wykona tę operację dla danego obiektu struktury `Student`:
 ```cpp
 float calculate_grade(const Student &student) {
-    float sum = std::accumulate(student.grades.begin(), student.grades.end(), 0.0f);
-    return sum / student.grades.size();
+float sum = std::accumulate(student.grades.begin(), student.grades.end(), 0.0f);
+return sum / student.grades.size();
 }
 ```
 
@@ -30,14 +30,14 @@ Funkcje powiązane z daną strukturą można zadeklarować wewnątrz jej deklara
 Zmodyfikowana deklaracja struktury `Student` może wyglądać następująco:
 ```cpp
 struct Student {
-    std::string name;
-    std::string surname;
-    std::vector<float> grades;
+std::string name;
+std::string surname;
+std::vector<float> grades;
 
-    float calculate_grade() {
-        float sum = std::accumulate(grades.begin(), grades.end(), 0.0f);
-        return sum / grades.size();
-    }
+float calculate_grade() {
+float sum = std::accumulate(grades.begin(), grades.end(), 0.0f);
+return sum / grades.size();
+}
 };
 ```
 
@@ -64,13 +64,13 @@ Napisany program w chwili obecnej nie dokonuje żadnego sprawdzania wprowadzanyc
 Przykładowa metoda (wewnątrz struktury `Student`), która umożliwia dodanie nowej oceny wraz z weryfikacją jej poprawności może wyglądać następująco:
 ```cpp
 bool add_grade(float grade) {
-    if (grade >= 2.0 and grade <= 5.0) {
-        // The grade is valid; let's add it and return true
-        grades.push_back(grade);
-        return true;
-    }
-    // The grade is invalid; let's return false
-    return false;
+if (grade >= 2.0 and grade <= 5.0) {
+// The grade is valid; let's add it and return true
+grades.push_back(grade);
+return true;
+}
+// The grade is invalid; let's return false
+return false;
 }
 ```
 
@@ -105,28 +105,30 @@ Istnieją trzy modyfikatory dostępu do pól i metod struktury lub klasy: *publi
 Jedyną różnicą między klasami i strukturami w języku C++ jest domyślny modyfikator dostępu. W praktyce deklaracja następującej struktury:
 ```cpp
 struct Student {
-    std::string name;
-    std::string surname;
+std::string name;
+std::string surname;
 }
 ```
 jest równoznaczna następującej deklaracji klasy:
 ```cpp
 class Student {
 public:
-    std::string name;
-    std::string surname;
+std::string name;
+std::string surname;
 }
 ```
 
 Modyfikator obowiązuje dla wszystkich pól i metod zadeklarowanych pod nim, aż do pojawienia się kolejnego modyfikatora.
 
-Dodatkową korzyścią wynikającą z chronienia pól i umożliwienia do nich dostępu jedynie przez metody publiczne jest fakt, że osoba korzystająca z klasy nie musi przejmować się tym, w jaki sposób przechowywane są informacje wewnątrz klasy. Sposób ten może również ulec zmianie wraz z kolejnymi wersjami klasy - dla użycia klasy ważny jest jedynie jej **interfejs**, czyli funkcje i pola dostępne dla użytkownika klasy. Z tych względów preferowane jest deklarowanie wszystkich pól jako prywatne, a od tej pory w instrukcjach będą się pojawiały wyłącznie przykłady wykorzystujące klasy.
+Dodatkową korzyścią wynikającą z chronienia pól i umożliwienia do nich dostępu jedynie przez metody publiczne jest fakt, że osoba korzystająca z klasy nie musi przejmować się tym, w jaki sposób przechowywane są informacje wewnątrz klasy. Sposób ten może również ulec zmianie wraz z kolejnymi wersjami klasy - dla użycia klasy ważny jest jedynie jej **interfejs**, czyli funkcje i pola dostępne dla użytkownika klasy. Z tych względów preferowane jest deklarowanie wszystkich pól jako prywatnych, a od tej pory w instrukcjach będą się pojawiały wyłącznie przykłady wykorzystujące klasy.
 
 ---
 #### Zadanie do realizacji
 Dodaj modyfikator *public* do poprzednio utworzonej klasy `Student`. Od tego momentu program powinien działać tak samo jak przed zamianą struktury na klasę.
 
 Zmień modyfikator dostępu do pola `grades` tak, aby zapobiec jego bezpośredniej modyfikacji.
+
+---
 
 ## Konstruktor i destruktor
 
@@ -137,9 +139,9 @@ Konstruktor może mieć dodatkowo argumenty, którymi można na przykład zainic
 ```cpp
 class Student {
 public:
-    Student(std::string n) {
-        name = n;
-    }
+Student(std::string n) {
+name = n;
+}
 /* ... */
 }
 ```
@@ -172,19 +174,20 @@ W wielu przypadkach stworzona przez nas klasa będzie miała właściwość (pol
 ```cpp
 class Student {
 public:
-    void set_index(int index) {
-        index_ = index;
-    }
-    void index() {
-        return index_;
-    }
+void set_index(int index) {
+index_ = index;
+}
+void index() {
+return index_;
+}
 private:
-    int index_;
+int index_;
 }
 ```
 
-Przebieg zajęć
+Zadania
 ------
+#### 1. Student
 
 Rozbuduj klasę `Student`, uwzględniając daną funkcjonalność:
 
@@ -204,10 +207,7 @@ Pamiętaj, że oceny mogą przyjąć tylko określone wartości, a dopuszczalne 
 
 [//]: # (Podziel kod na pliki nagłówkowy z definicją klasy i źródłowy z definicjami metod.)
 
-
-Zadania domowe
-------
-#### 1. Liczby zespolone
+#### 2. Liczby zespolone
 
 Zaprojektuj klasę `Complex`, która przechowa liczbę zespoloną. Powinna ona mieć konstruktor, który pozwoli na zainicjalizowanie wartości liczby.
 
@@ -222,9 +222,11 @@ Poprawnie zaprojektowana klasa powinna pozwolić na uruchomienie poniższego kod
 Complex a(1.0, -2.0); // creates 1-2i
 Complex b(3.14); // creates 3.14
 
+b.set_im(-5);
+
 Complex c = a.add(b);
 
-c.print(); // prints 4.14-2i
+c.print(); // prints 4.14-7i
 
 ```
 
