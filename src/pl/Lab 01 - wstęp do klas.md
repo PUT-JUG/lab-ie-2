@@ -6,17 +6,17 @@ Proste struktury i funkcje w stylu języka C
 Do tej pory tworzone na zajęciach struktury zawierały jedynie pola będące zmiennymi różnych typów. Jako przykład można potraktować strukturę `Student`:
 ```cpp
 struct Student {
-std::string name;
-std::string surname;
-std::vector<float> grades;
+    std::string name;
+    std::string surname;
+    std::vector<float> grades;
 };
 ```
 
 Zakładając, że chcemy wyliczyć średnią ocen należy napisać odpowiednią funkcję, które wykona tę operację dla danego obiektu struktury `Student`:
 ```cpp
 float calculate_grade(const Student &student) {
-float sum = std::accumulate(student.grades.begin(), student.grades.end(), 0.0f);
-return sum / student.grades.size();
+    float sum = std::accumulate(student.grades.begin(), student.grades.end(), 0.0f);
+    return sum / student.grades.size();
 }
 ```
 
@@ -30,14 +30,14 @@ Funkcje powiązane z daną strukturą można zadeklarować wewnątrz jej deklara
 Zmodyfikowana deklaracja struktury `Student` może wyglądać następująco:
 ```cpp
 struct Student {
-std::string name;
-std::string surname;
-std::vector<float> grades;
+    std::string name;
+    std::string surname;
+    std::vector<float> grades;
 
-float calculate_grade() {
-float sum = std::accumulate(grades.begin(), grades.end(), 0.0f);
-return sum / grades.size();
-}
+    float calculate_grade() {
+        float sum = std::accumulate(grades.begin(), grades.end(), 0.0f);
+        return sum / grades.size();
+    }
 };
 ```
 
@@ -64,13 +64,13 @@ Napisany program w chwili obecnej nie dokonuje żadnego sprawdzania wprowadzanyc
 Przykładowa metoda (wewnątrz struktury `Student`), która umożliwia dodanie nowej oceny wraz z weryfikacją jej poprawności może wyglądać następująco:
 ```cpp
 bool add_grade(float grade) {
-if (grade >= 2.0 and grade <= 5.0) {
-// The grade is valid; let's add it and return true
-grades.push_back(grade);
-return true;
-}
-// The grade is invalid; let's return false
-return false;
+    if (grade >= 2.0 and grade <= 5.0) {
+        // The grade is valid; let's add it and return true
+        grades.push_back(grade);
+        return true;
+    }
+    // The grade is invalid; let's return false
+    return false;
 }
 ```
 
@@ -105,16 +105,16 @@ Istnieją trzy modyfikatory dostępu do pól i metod struktury lub klasy: *publi
 Jedyną różnicą między klasami i strukturami w języku C++ jest domyślny modyfikator dostępu. W praktyce deklaracja następującej struktury:
 ```cpp
 struct Student {
-std::string name;
-std::string surname;
+    std::string name;
+    std::string surname;
 }
 ```
 jest równoznaczna następującej deklaracji klasy:
 ```cpp
 class Student {
 public:
-std::string name;
-std::string surname;
+    std::string name;
+    std::string surname;
 }
 ```
 
@@ -139,10 +139,10 @@ Konstruktor może mieć dodatkowo argumenty, którymi można na przykład zainic
 ```cpp
 class Student {
 public:
-Student(std::string n) {
-name = n;
-}
-/* ... */
+    Student(std::string n) {
+        name = n;
+    }
+    /* ... */
 }
 ```
 
@@ -174,14 +174,14 @@ W wielu przypadkach stworzona przez nas klasa będzie miała właściwość (pol
 ```cpp
 class Student {
 public:
-void set_index(int index) {
-index_ = index;
-}
-void index() {
-return index_;
-}
+    void set_index(int index) {
+        index_ = index;
+    }
+    void index() {
+        return index_;
+    }
 private:
-int index_;
+    int index_;
 }
 ```
 
