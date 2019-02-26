@@ -64,7 +64,7 @@ Napisany program w chwili obecnej nie dokonuje żadnego sprawdzania wprowadzanyc
 Przykładowa metoda (wewnątrz struktury `Student`), która umożliwia dodanie nowej oceny wraz z weryfikacją jej poprawności może wyglądać następująco:
 ```cpp
 bool add_grade(float grade) {
-    if (grade >= 2.0 and grade <= 5.0) {
+    if (grade >= 2.0 && grade <= 5.0) {
         // The grade is valid; let's add it and return true
         grades.push_back(grade);
         return true;
