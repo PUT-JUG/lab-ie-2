@@ -1,10 +1,18 @@
 # Instalacja środowiska Qt Creator
 
-## Jeśli masz zainstalowany Microsoft Visual Studio 
+## Jeśli nie masz zainstalowanego Microsoft Visual Studio
 
-### Instalacja narzędzi debuggera SDK
+### Instalacja Build Tools for Visual Studio
 
-W celu wykorzystania debuggera w środowisku innym niż Visual Studio należy zainstalować doinstalować odpowiedni komponent Windows SDK.
+Qt Creator nie jest domyślnie dostarczany z kompilatorem, pozwala natomiast wykorzystywać zewnętrzne kompilatory.
+
+Instalator Qt Creatora pozwala na automatyczną instalację zestawu kompilatorów *MinGW* (*GCC* w wersji dla systemu Windows), ale w celu zachowania pełnej zgodności, wykorzystamy kompilator od Microsoftu z pakietu Build Tools for Visual Studio.
+
+Jeśli masz już zainstalowany Microsoft Visual Studio, Qt Creator wykorzysta zainstalowany wraz z nim kompilator. Jeśli nie, pobierz instalator pakietu spod adresu https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=15 i uruchom. Zaznacz do instalacji pakiet *Visual C++ build tools* i zatwierdź instalację.
+
+## Instalacja narzędzi debuggera SDK
+
+W celu wykorzystania debuggera w środowisku innym niż Visual Studio, należy zainstalować doinstalować odpowiedni komponent Windows SDK.
 
 Pierwszym krokiem jest uruchomienie ustawień Apps & features (Aplikacje i funkcje). Następnie należy wybrać opcję *Modify* dla *Windows Software Development Kit*:
 
@@ -16,21 +24,9 @@ W uruchomionym kreatorze należy wybrać kolejno: opcję *Change*, a następnie 
 
 Po kliknięciu przycisku *Change* komponent zostanie zainstalowany.
 
-## Jeśli nie masz zainstalowanego Microsoft Visual Studio
-
-### Instalacja Build Tools for Visual Studio
-
-Qt Creator nie jest domyślnie dostarczany z kompilatorem, pozwala natomiast wykorzystywać zewnętrzne kompilatory.
-
-Instalator Qt Creatora pozwala na automatyczną instalację zestawu kompilatorów *MinGW* (*GCC* w wersji dla systemu Windows), ale w celu zachowania pełnej zgodności, wykorzystamy kompilator z pakietu Build Tools for Visual Studio.
-
-Pobierz pakiet spod adresu https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=15
-
-
-
 ## Instalacja QtCreator
 
-Środowisko QtCreator wraz z bibliotekami Qt można pobrać [tutaj](http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe).
+Środowisko QtCreator wraz z bibliotekami Qt można pobrać spod adresu http://download.qt.io/official_releases/online_installers/qt-unified-windows-x86-online.exe .
 
 Konto *Qt Account* nie jest wymagane do pracy ze środowiskiem - na etapie pytania o login należy wybrać **Skip**.
 

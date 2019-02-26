@@ -20,7 +20,7 @@ float calculate_grade(const Student &student) {
 }
 ```
 
-Takie podejście niesie ze sobą pewne konsekwencje: szczególnie w większych projektach powstaje dużo wolnych, globalnie dostępnych funkcji o różnych nazwach, które nie są hierarchicznie ułożone.
+Takie podejście niesie ze sobą pewne konsekwencje: szczególnie w większych projektach powstaje dużo wolnych (nie należących do żadnej klasy), globalnie dostępnych funkcji o różnych nazwach, które nie są hierarchicznie ułożone.
 
 Proste struktury w stylu języka C++
 -----------------------------------
@@ -163,7 +163,7 @@ Co się stanie, kiedy spróbujesz utworzyć obiekt nie podając wartości parame
 Student s1;
 ```
 
-Napraw ten problem dodając domyślną wartość argumentów.
+Napraw ten problem dodając domyślną wartość argumentów do konstruktora.
 
 ---
 
@@ -174,10 +174,10 @@ W wielu przypadkach stworzona przez nas klasa będzie miała właściwość (pol
 ```cpp
 class Student {
 public:
-    void set_index(int index) {
+    void set_index(int index) { // setter
         index_ = index;
     }
-    void index() {
+    void index() { // getter
         return index_;
     }
 private:
@@ -212,7 +212,7 @@ Pamiętaj, że oceny mogą przyjąć tylko określone wartości, a dopuszczalne 
 Zaprojektuj klasę `Complex`, która przechowa liczbę zespoloną. Powinna ona mieć konstruktor, który pozwoli na zainicjalizowanie wartości liczby.
 
 Dodaj do niej metody, które pozwolą na:
-* odczyt i modyfikację części rzeczywistej oraz urojonej
+* odczyt i modyfikację części rzeczywistej oraz urojonej (niezależnie)
 * wyświetlenie liczby w czytelnej postaci
 * dodanie do jednej liczby drugiej liczby zespolonej oraz rzeczywistej
 
