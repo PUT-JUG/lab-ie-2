@@ -177,7 +177,7 @@ public:
     void set_index(int index) { // setter
         index_ = index;
     }
-    void index() { // getter
+    int index() { // getter
         return index_;
     }
 private:
