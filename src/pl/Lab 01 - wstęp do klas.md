@@ -182,7 +182,7 @@ public:
     }
 private:
     int index_;
-}
+};
 ```
 
 Zadania
