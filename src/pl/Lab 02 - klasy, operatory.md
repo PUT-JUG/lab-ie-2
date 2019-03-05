@@ -180,7 +180,7 @@ W przypadku operatora `<<` lewym operandem jest *strumień*, a prawym - element 
 Możemy w takim wypadku napisać wolną funkcję, która przyjmie *strumień* i nasz ułamek, i zwróci zmodyfikowany strumień:
 
 ```cpp
-ostream &operator<<(ostream &str, Rational &rhs){
+std::ostream &operator<<(std::ostream &str, Rational &rhs){
     if (rhs.den_ == 1) {
         str << rhs.num_;
     } else {
@@ -194,12 +194,12 @@ Dodaj powyższy kod do pliku `Rational.cpp`
 
 Wolne funkcje nie mają jednak dostępu do pól prywatnych klasy, w związku z czym musimy zadeklarować przyjaźń klasy z funkcją. Wewnątrz definicji klasy `Rational` dodaj:
 ```cpp
-friend ostream &operator<<(ostream &str, Rational &rhs);
+friend std::ostream &operator<<(std::ostream &str, Rational &rhs);
 ```
 
 ---
 #### Zadanie do realizacji
-Dodaj do klasy `Rational` operator  `>>`, dzięki któremu będzie można pobrać od użytkownika ułamek.
+Dodaj do klasy `Rational` operator  `>>`, dzięki któremu będzie można pobrać ze strumenia typu `istream` (np. z konsoli poprzez `cin`) ułamek.
 Dopuść dwa możliwe formaty wejścia:
 * liczba całkowita, np: `5`
 * ułamek, np: `7/22`

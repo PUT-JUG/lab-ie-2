@@ -107,7 +107,7 @@ Jedyną różnicą między klasami i strukturami w języku C++ jest domyślny mo
 struct Student {
     std::string name;
     std::string surname;
-}
+};
 ```
 jest równoznaczna następującej deklaracji klasy:
 ```cpp
@@ -115,7 +115,7 @@ class Student {
 public:
     std::string name;
     std::string surname;
-}
+};
 ```
 
 Modyfikator obowiązuje dla wszystkich pól i metod zadeklarowanych pod nim, aż do pojawienia się kolejnego modyfikatora.

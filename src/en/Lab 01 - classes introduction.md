@@ -107,7 +107,7 @@ The only difference between classes and structures in C++ is the default access 
 struct Student {
     std::string name;
     std::string surname;
-}
+};
 ```
 is equivalent to the following class declaration:
 ```cpp
@@ -115,7 +115,7 @@ class Student {
 public:
     std::string name;
     std::string surname;
-}
+};
 ```
 
 The modifier is applied to all fields and methods declared below it until new modifier is encountered.
