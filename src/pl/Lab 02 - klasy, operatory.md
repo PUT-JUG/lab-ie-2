@@ -167,7 +167,7 @@ Samodzielnie zaimplementuj operator mnożenia `*`. Przetestuj jego działanie.
 
 ### Klasy zaprzyjaźnione, operator strumieniowy
 
-Nie zawsze działanie operatorów jest toższsame z ich pierwotnym przeznaczeniem. Przykładowo, operatory `<<` oraz `>>`, oryginalnie służyły do przesunięć bitowych na liczbach, jednak ze względu na intuicyjność graficzną (kształ strzałki) w C++ znalazły zastosowanie w strumieniach.
+Nie zawsze działanie operatorów jest toższsame z ich pierwotnym przeznaczeniem. Przykładowo, operatory `<<` oraz `>>`, oryginalnie służyły do przesunięć bitowych na liczbach, jednak ze względu na intuicyjność graficzną (kształt strzałki) w C++ znalazły zastosowanie w strumieniach.
 
 Wyświetlanie wartości ułamka przy użyciu metody `print()` nie jest wygodne, nie umożliwia też np. zapisu do pliku tekstowego. Wygodniejsza byłaby forma:
 
@@ -270,7 +270,7 @@ Zadania
 
 Zaprojektuj i zaimplementuj klasę pozwalającą na przechowywanie czasu i podstawowe operacje (dodawanie i odejmowanie, mnożenie przez skalar).
 
-Klasa powinna umożliwiać wyświetlenie wartości w konsoli czasu w formacie czytelnym dla użytkownika, a także pobieranie czasu od użytkownika oraz konwersję z/na liczbę całkowitą sekund.
+Klasa powinna umożliwiać wyświetlenie wartości czasu w konsoli, w formacie czytelnym dla użytkownika, a także pobieranie czasu od użytkownika oraz konwersję z/na liczbę całkowitą sekund.
 
 Przykładowe użycie:
 
