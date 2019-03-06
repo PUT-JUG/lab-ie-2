@@ -297,7 +297,7 @@ Faktura w najprostszej wersji powinna mieć możliwość dodawania elementów i 
 `Item` - klasa opisująca pojedynczą pozycję na fakturze, z poniższymi atrybutami:
 * nazwa
 * cena jednostkowa netto
-* typ stawki VAT ("A" – 23%, "B" – 8%, "C" – 0%)
+* typ stawki VAT (A – 23%, B – 8%, C – 0%)
 * sprzedana ilość
 
 Przykładowa faktura po "wydruku" może wyglądać następująco:
@@ -321,7 +321,7 @@ Ostatecznie klasy powinny umożliwić wykonanie kodu podobnego do poniższego:
 ```cpp
 Invoice inv(7770003699, 0123456789);
 inv.add_item(Item("Sruba M3", 0.37, 'A', 100));
-inv.add_item(Item("Wiertlo 2 m", 2.54, 'B', 2));
+inv.add_item(Item("Wiertlo 2 mm", 2.54, 'B', 2));
 cout << inv << endl;
 ```
 
