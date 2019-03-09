@@ -1,4 +1,4 @@
-OpenGL, SFML
+SFML - obsługa zdarzeń, dziedziczenie
 =============
 
 Używanie bibliotek zewnętrznych
