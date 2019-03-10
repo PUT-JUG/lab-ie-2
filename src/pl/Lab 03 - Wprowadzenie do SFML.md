@@ -13,7 +13,7 @@ Wykorzystamy środowisko Qt Creator, skonfigurowane z kompilatorem MSVC z pakiet
 
 Pobierz aktualną wersję biblioteki SFML ze strony jej twórców (https://www.sfml-dev.org/download/sfml/2.5.1/). Wybierz wersję odpowiednią dla używanego systemu, kompilatora i architektury (*Visual C++ 15 (2017) - 64-bit*). Rozpakuj ją w wybrane miejsce na dysku, instrukcja zakłada lokalizację katalogu z biblioteką bezpośrednio na dysku `C:`.
 
-Stwórz projekt aplikacji zgodnie z instrukcją [Instalacja Qt Creator](Instalacja%20Qt%20Creator.html). Umieść w projekcie plik `main.cpp` z zawartością pobraną z odnośnika [hello_sfml.cpp](../resources/hello_sfml.cpp).
+Stwórz projekt aplikacji zgodnie z instrukcją [Instalacja Qt Creator/Utworzenie nowego projektu](Instalacja%20Qt%20Creator.html#utworzenie-nowego-projektu). Umieść w projekcie plik `main.cpp` z zawartością pobraną z odnośnika [hello_sfml.cpp](../resources/hello_sfml.cpp).
 
 Spróbuj skompilować projekt. **Kompilator** zwróci błąd o braku pliku nagłówkowego `SFML/Window.h` - nie ma go w ścieżkach systemowych, które przeszukuje. Dodaj brakującą ścieżkę do ustawień projektu modyfikując plik `.pro` opisujący projekt:
 
@@ -46,7 +46,7 @@ SFML jest wieloplatformową biblioteką ułatwiających tworzenie programów wyk
 Dokumentację API biblioteki można znaleźć pod adresem:
 https://www.sfml-dev.org/documentation/2.5.1/
 
-Tutoriale opisujące podstawową funkcjonalność są dostępne:
+Tutoriale opisujące podstawową funkcjonalność są dostępne poniżej:
 https://www.sfml-dev.org/tutorials/2.5/
 
 Wszystkie zasoby biblioteki znajdują się w przestrzeni nazw (ang. *namespace*) `sf`. Aby uniknąć zaśmiecania głównej przestrzeni nazw, będziemy unikać stosowania dyrektyw `using namespace ...`, a zamiast tego poprzedzać odpowiednie nazwy `sf::`, `std::` itd. 
@@ -57,7 +57,7 @@ Wewnątrz pętli sprawdzana jest kolejka zdarzeń (naciśnięcia klawiszy, ruch 
 
 ---
 #### Zadanie do realizacji
-Przeanalizuj działanie przykładowego kodu. Zmień rozmiar i ułożenie elementów na scenie. Co się dzieje, kiedy zmienisz rozmiar okna po uruchomieniu programu? W jakich jednostkach są wyrażone rozmiary i położenie obiektów na scenie?
+Przeanalizuj działanie przykładowego kodu. Zmień rozmiar i ułożenie elementów na scenie, spróbuj dodać kolejne. Co się dzieje, kiedy zmienisz rozmiar okna po uruchomieniu programu? W jakich jednostkach są wyrażone rozmiary i położenie obiektów na scenie?
 
 ---
 
@@ -82,22 +82,57 @@ Zapoznaj się z dokumentacją klasy `sf::Clock`. Dodaj do programu obiekt `sf::C
 
 ## Poruszanie obiektem
 
-Wszystkie obiekty "rysowalne" w bibliotece SFML mają zestaw metod pozwalających na ich manipulację na płaszczyźnie ekranu - przemieszczanie, skalowanie, obracanie. Metodą pozwalającą na poruszanie *względem bieżącej pozycji* jest `move(float offsetX, float offsetY)`.
+Wszystkie obiekty "rysowalne" w bibliotece SFML mają zestaw metod pozwalających na ich manipulację (transformacje) na płaszczyźnie ekranu - przemieszczanie, skalowanie, obracanie. Metodą pozwalającą na poruszanie *względem bieżącej pozycji* jest `move(float offsetX, float offsetY)`.
 
 ---
 #### Zadanie do realizacji
 
 Utwórz w programie dwie zmienne reprezentujące prędkość jednego z obiektów - składową poziomą (x) i pionową (y), np. `rectangle_velocity_x` oraz `rectangle_velocity_y`. Będą one oznaczały prędkość obiektu w pikselach na sekundę. Nadaj im wartości odpowiednio 50 i 150.
 
-Wykorzystaj czas obliczony w poprzednim zadaniu i w każdym przebiegu pętli przesuwaj obiekty metodą `move` o dystans, jaki powinny przebyć w zmierzonym czasie przy zadanej prędkości.
+Wykorzystaj czas obliczony w poprzednim zadaniu i w każdym przebiegu pętli przesuwaj jeden z obiektów metodą `move` o dystans, jaki powinien przebyć w zmierzonym czasie przy zadanej prędkości.
+
+Następnie dodaj zmienną `rectangle_angular_velocity` opisującą prędkość obrotu figury wokół własnej osi (w stopniach na sekundę) i nadaj jej wartość 10. Wykorzystaj metodę `rotate` obiektu, aby spowodować jego obracanie się.
+
+**Uwaga:** w przeciwieństwie do funkcji trygonometrycznych w bibliotece standardowej, funkcje w SFML operują na kątach wyrażonych w stopniach.
 
 ---
 
 ## Proste kolizje
 
-Metoda `getGlobalBounds()`...
+Wykrywanie kolizji pomiędzy obiektami na scenie stanowi fundament mechaniki wielu gier czy aplikacji wykonujących proste symulacje fizyki. Ponieważ dokładne obliczenia kolizji wielu nieregularnych obiektów byłyby bardzo zasobochłonne, stosuje się pewne uproszczenia, np. przybliżanie kształtu obiektów prostokątem/kołem (na płaszczyźnie) lub prostopadłościanem (w przestrzeni trójwymiarowej).
 
+Obiekty, które narysowaliśmy mają metodę `getGlobalBounds()`, która zwraca prostokąt `sf::FloatRect` stanowiący obrys figury, we współrzędnych okna.
+
+---
+#### Zadanie do realizacji
+
+Wykorzystując obrys obracającego się prostokąta, napisz zestaw warunków sprawdzających, czy dotyka on jednej z krawędzi ekranu. Jeśli tak, spowoduj jego "odbicie" poprzez zmianę *zwrotu* prędkości w odpowiednim kierunku, w zależności od napotkanej ściany. Możesz przyjąć, że pole odbijania ma stałe wymiary.
+
+---
+
+## Kolory
+
+Kolory w SFML opisywane są w przestrzeni *RGB* (ang. *red*, *green*, *blue*). Każda składowa koloru to liczba 8-bitowa bez znaku (zakres 0-255). Jest to bardzo często spotykany sposób reprezentacji koloru w grafice komputerowej, nazywany też czasem np. *RGB888* lub *RGB 24-bit*.
+
+Podstawowe figury w SFML mają kolor obrysu oraz wypełnienia.
+
+Przykładowo:
+
+```cpp
+rectangle.setFillColor(sf::Color(255, 255, 0));
+```
+
+spowoduje zmianę koloru wypełnienia prostokąta na żółty.
+
+---
+#### Zadanie do realizacji
+
+Dodaj po każdym odbiciu zmianę koloru prostokąta na losowy, tak aby uzyskać efekt podobny do poniższego:
+
+![](../images/sfml_bounce.gif)
+
+---
 
 
 ***
-Autorzy: *Jakub Tomczyński*, *Michał Fularz*, *Piotr Kaczmarek*, *Michał Nowicki*, *Jan Wietrzykowski*
+Autorzy: *Jakub Tomczyński*, *Dominik Pieczyński*
