@@ -32,7 +32,7 @@ LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window
 
 Ponownie uruchom *qmake*, a następnie skompiluj projekt. Kompilacja powinna przebiec bez błędów, jednak nadal nie będzie możliwe uruchomienie programu.
 
-Wynika to z faktu, że biblioteki, które dołączyliśmy do projektu nie są wkompilowane w plik wykonywalny - są łączone dynamicznie (ang. *DLL - Dynamic-Link Library*) i ładowane z zewnętrznych plików w trakcie uruchamiania. Mogą być dzięki temu współdzielone pomiędzy wiele programów. Pliki DLL można umieścić w katalogach systemowych lub w katalogu, gdzie znajduje się plik wykonywalny programu.
+Wynika to z faktu, że biblioteki, które dołączyliśmy do projektu nie są wkompilowane w plik wykonywalny - są łączone dynamicznie (ang. *DLL - Dynamic-Link Library*) i ładowane z zewnętrznych plików w trakcie uruchamiania. Mogą być dzięki temu współdzielone pomiędzy wiele programów, które dzięki temu mają mniejszy rozmiar. Pliki DLL można umieścić w katalogach systemowych lub w katalogu, gdzie znajduje się plik wykonywalny programu (sposób preferowany).
 
 Skopiuj pliki `.dll` z katalogu `bin` biblioteki SFML do katalogu, w którym znajduje się plik wykonywalny  (`exe`) utworzonej przez Ciebie aplikacji. W przypadku środowiska Qt Creator, katalog kompilacji domyślnie znajduje się obok katalogu projektu i ma nazwę *build-<nazwa_projektu>-<nazwa_kitu>-<nazwa_wydania>*, np. *build-sfml_hello-Desktop_Qt_5_10_1_MSVC2017_64bit-Debug*. Następnie uruchom projekt. Poprawnie działający program powinien wyświetlić następujące okienko:
 
@@ -49,11 +49,11 @@ https://www.sfml-dev.org/documentation/2.5.1/
 Tutoriale opisujące podstawową funkcjonalność są dostępne:
 https://www.sfml-dev.org/tutorials/2.5/
 
-Wszystkie zasoby biblioteki znajdują się w przestrzeni nazw (ang. *namespace*) `sf`. Aby uniknąć zaśmiecania głównej przestrzeni nazw, będziemy unikać stosowania dyrektywy `using namespace ...`, a zamiast tego poprzedzać odpowiednie nazwy `sf::`, `std::` itd. 
+Wszystkie zasoby biblioteki znajdują się w przestrzeni nazw (ang. *namespace*) `sf`. Aby uniknąć zaśmiecania głównej przestrzeni nazw, będziemy unikać stosowania dyrektyw `using namespace ...`, a zamiast tego poprzedzać odpowiednie nazwy `sf::`, `std::` itd. 
 
 W przykładzie powyżej przedstawiono typowy przebieg działania aplikacji wykorzystującej SFML. Obejmuje on inicjalizację okna (klasa `sf::RenderWindow`) i zasobów wykorzystywanych w programie (w tym przypadku trzy kształty), a następnie wykonywanie cyklicznie pętli programu, której każdy przebieg prowadzi do wygenerowania jednej klatki obrazu, aż do chwili zamknięcia głównego okna.
 
-Wewnątrz pętli sprawdzana jest kolejka zdarzeń (naciśnięcia klawiszy, ruch myszy itd.), a następnie generowana od postaw klatka obrazu: czyszczone jest "płótno" okna, rysowane kolejne obieky, a ostatecznie podmieniany *framebuffer*.
+Wewnątrz pętli sprawdzana jest kolejka zdarzeń (naciśnięcia klawiszy, ruch myszy itd.), a następnie generowana jest od postaw klatka obrazu: czyszczone jest "płótno" okna, rysowane są kolejne obieky, a ostatecznie podmieniany jest *framebuffer*.
 
 ---
 #### Zadanie do realizacji
@@ -63,7 +63,7 @@ Przeanalizuj działanie przykładowego kodu. Zmień rozmiar i ułożenie element
 
 ## Pomiar czasu, animacje
 
-Animacja obiektów polega na wyświetleniu nieznacznie zmienionego obiektu w każdej klatce obrazu - w każdym przebiegu głównej pętli - tak aby uzyskać wrażenie płynnego ruchu.
+Animacja obiektów polega na wyświetleniu nieznacznie zmienionego obiektu w każdej klatce obrazu (w każdym przebiegu głównej pętli) tak aby uzyskać wrażenie płynnego ruchu.
 
 Aby animacja obiektów była płynna, a jej tempo niezależne od liczby wyświetlanych klatek na sekundę, musimy dostosować kolejne klatki animacji, na przykład na jeden z poniższych sposobów:
 
@@ -71,7 +71,7 @@ Aby animacja obiektów była płynna, a jej tempo niezależne od liczby wyświet
 * wywoływać poruszanie obiektami z oddzielnego wątku, ze stałą częstotliwością;
 * założyć stałą liczbę klatek na sekundę - w tym przypadku, jeśli komputer nie nadąży z obliczeniami lub wyświetlaniem, animacja zwolni.
 
-W dzisiejszym przykładzie wykorzystamy pierwszą metodę. Do pomiaru czasu możemy wykorzystać klasę `sf::Clock`. Jest to zegar działający na zasadzie stopera - zaczyna odmierzanie czasu w momencie utworzenia obiektu, pozwala na odczytanie czasu jaki upłynął oraz restart.
+W dzisiejszym przykładzie wykorzystamy pierwszą metodę. Do pomiaru czasu możemy wykorzystać klasę `sf::Clock`. Jest to zegar działający na zasadzie stopera, który zaczyna odmierzanie czasu w momencie utworzenia obiektu. Pozwala on na odczytanie czasu jaki upłynął oraz restart odmierzania.
 
 ---
 #### Zadanie do realizacji
@@ -87,7 +87,7 @@ Wszystkie obiekty "rysowalne" w bibliotece SFML mają zestaw metod pozwalającyc
 ---
 #### Zadanie do realizacji
 
-Utwórz w programie dwie zmienne reprezentujące prędkość jednego z obiektów - składową poziomą (x) i pionową (y), np. `rectangle_velocity_x` oraz `rectangle_velocity_y`. Będą oznaczały prędkość obiektu w pikselach na sekundę, nadaj im wartości odpowiednio 50 i 150.
+Utwórz w programie dwie zmienne reprezentujące prędkość jednego z obiektów - składową poziomą (x) i pionową (y), np. `rectangle_velocity_x` oraz `rectangle_velocity_y`. Będą one oznaczały prędkość obiektu w pikselach na sekundę. Nadaj im wartości odpowiednio 50 i 150.
 
 Wykorzystaj czas obliczony w poprzednim zadaniu i w każdym przebiegu pętli przesuwaj obiekty metodą `move` o dystans, jaki powinny przebyć w zmierzonym czasie przy zadanej prędkości.
 
