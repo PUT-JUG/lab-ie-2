@@ -13,7 +13,7 @@ Wykorzystamy środowisko Qt Creator, skonfigurowane z kompilatorem MSVC z pakiet
 
 Pobierz aktualną wersję biblioteki SFML ze strony jej twórców (https://www.sfml-dev.org/download/sfml/2.5.1/). Wybierz wersję odpowiednią dla używanego systemu, kompilatora i architektury (*Visual C++ 15 (2017) - 64-bit*). Rozpakuj ją w wybrane miejsce na dysku, instrukcja zakłada lokalizację katalogu z biblioteką bezpośrednio na dysku `C:`.
 
-Stwórz projekt aplikacji zgodnie z instrukcją [Instalacja Qt Creator/Utworzenie nowego projektu](Instalacja%20Qt%20Creator.html#utworzenie-nowego-projektu). Umieść w projekcie plik `main.cpp` z zawartością pobraną z odnośnika [hello_sfml.cpp](../resources/hello_sfml.cpp).
+Stwórz projekt aplikacji zgodnie z instrukcją [Instalacja Qt Creator/Utworzenie nowego projektu](Instalacja%20Qt%20Creator.html#utworzenie-nowego-projektu). Umieść w projekcie plik `main.cpp` z zawartością pobraną z odnośnika [sfml_hello.cpp](../resources/sfml_hello.cpp).
 
 Spróbuj skompilować projekt. **Kompilator** zwróci błąd o braku pliku nagłówkowego `SFML/Window.h` - nie ma go w ścieżkach systemowych, które przeszukuje. Dodaj brakującą ścieżkę do ustawień projektu modyfikując plik `.pro` opisujący projekt:
 
