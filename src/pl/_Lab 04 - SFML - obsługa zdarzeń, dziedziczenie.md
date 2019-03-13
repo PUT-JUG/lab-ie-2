@@ -47,7 +47,7 @@ Skopiuj pliki `.dll` z katalogu `bin` biblioteki SFML do katalogu, w którym zna
 Biblioteka SFML
 ----------
 
-SFML jest wieloplatformową biblioteką ułatwiających tworzenie programów wykorzystujących grafikę dwuwymiarową, np. prostych gier. Zawiera moduły pozwalające na m.in. obsługę grafiki, wejścia klawiatury/myszy, dźwięku i sieci. Ponieważ
+SFML jest wieloplatformową biblioteką ułatwiających tworzenie programów wykorzystujących grafikę dwuwymiarową, np. prostych gier. Zawiera moduły pozwalające na m.in. obsługę grafiki, wejścia klawiatury/myszy, dźwięku i sieci.
 
 
 
