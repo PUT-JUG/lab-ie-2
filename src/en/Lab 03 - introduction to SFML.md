@@ -13,7 +13,7 @@ We will use the Qt Creator environment that is configured with the MSVC compiler
 
 Download the current version of the SFML library from its developers (https://www.sfml-dev.org/download/sfml/2.5.1/). Select a version that is suitable for your system, compiler, and architecture (*Visual C++ 15 (2017) - 64-bit*). Unpack it to the desired location on your disk. This manual assumes that the library directory is placed directly on the `C:` drive.
 
-Create an application project according to the [Qt Creator installation/Creating a new project]((Qt%Creator%installation.html#creating-a-new-project)) instruction. Place the `main.cpp` file with the content downloaded from the [sfml_hello.cpp](../resources/sfml_hello.cpp) in the project.
+Create an application project according to the [Qt Creator installation/Creating a new project](Qt%20Creator%20installation.html#creating-a-new-project) instruction. Place the `main.cpp` file with the content downloaded from the [sfml_hello.cpp](../resources/sfml_hello.cpp) in the project.
 
 Try to compile the project. **The compiler** will return an error if the header file `SFML/Window.h` is missing from the system paths it searches. Add the missing path to the project settings by modifying the `.pro` file describing the project:
 
