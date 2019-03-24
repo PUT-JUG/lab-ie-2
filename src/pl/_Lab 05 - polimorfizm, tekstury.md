@@ -75,6 +75,42 @@ Zwróć uwagę, na różnicę w odwoływaniu się do pól obiektu (`->` zamiast 
 
 ---
 
+Aby klasa bazowa była polimorficzna musi posiadać przynajmniej jedną metodę wirtualną (przydomek `virtual`). Metody wirtualne pozwalają na ich przeciążanie w klasie pochodnej w taki sposób, że gdy wywołamy je poprzez wskaźnik do klasy bazowej zostanie wywołana właściwa implementacja z klasy pochodnej. Gdyby funkcja nie miała przydomka `virtual` to jej wywołanie poprzez wskaźnik do klasy bazowej wywołałoby implementację z klasy bazowej, nie zważając na to, że w klasie pochodnej znajduje się przeciążona wersja funkcji.
+
+Niezwykle istotne jest aby **każda bazowa klasa polimorficzna** zawierała deklarację **wirtualnego destruktora**. Jeśli taka deklaracja nie znajdzie się w klasie bazowej to usuwanie obiektu klasy pochodnej poprzez wskaźnik do klasy bazowej jest **niezdefiniowanym zachowaniem** i może prowadzić do wycieku pamięci, gdyż wywołany zostanie **tylko** destruktor klasy bazowej. Najprostsza deklaracja wirtualnego destruktora wygląda następująco:
+```cpp
+virtual ~ClassName() = default;
+```
+
+W celu ponownego zinterpretowania wskaźnika do klasy bazowej jako wskaźnika lub referencji do klasy pochodnej należy użyć wyłuskania wskaźnika ("wyciągnięcia" obiektu na który wskaźnik wskazuje) oraz specjalnej funkcji `dynamic_cast`.
+
+---
+#### Zadanie do realizacji
+Do klasy `Vehicle` dodaj wirtualny destruktor. Przeanalizuj oraz wykonaj następujący kod:
+```cpp
+std::vector<std::unique_ptr<Vehicle>> vehicles;
+vehicles.emplace_back(std::make_unique<Bike>());
+
+Car &some_car = dynamic_cast<Car &>(*vehicles[0]);
+```
+
+Dlaczego zwracany jest wyjątek? Popraw kod w taki sposób, aby rzutowanie na referencję do klasy `Car` działało poprawnie. Sprawdź czy i kiedy możliwe jest wywołanie metod z klasy `Car`.
+
+**Uwaga:** zauważ, że w tym przypadku, z uwagi na bezpośrdnie przekazanie wyniku działania funkcji `std::make_unique` do metody `emplace_back` (bez użycia zmiennej do której przypisujemy wartość zwracaną przez `std::make_unique`), nie było konieczności używania `std::move`.
+
+---
+
+Polimorfizm a SFML
+------------------
+Wszystkie "rysowalne" klasy z biblioteki SFML dziedziczą po klasie polimorficznej `sf::Drawable`. Oznacza to, że możemy przechowywać wszystkie obiekty sceny w jednym kontenerze jako `std::unique_ptr<sf::Drawable>`.
+
+---
+#### Zadanie do realizacji
+Korzystając z teorii zamieszczonej powyżej utwórz wspólny wektor kilku obiektów o różnych kształtach i kolorach.
+
+W pętli głównej programu wywołuj metodę draw na wyłuskanych ze wskaźnika obiektach `sf::Drawable`.
+
+---
 
 
 ***
