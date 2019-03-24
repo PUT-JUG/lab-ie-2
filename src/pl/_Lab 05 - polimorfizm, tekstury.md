@@ -3,11 +3,11 @@ Polimorfizm, tekstury
 
 Wskaźniki
 ---------
-Istnieją dwa rodzaje pamięci: stos oraz sterta. Do tej pory staraliśmy się unikać alokacji pamięci na stercie.
+Zmienne, które tworzyliśmy do tej pory w programach poprzez prostą deklarację zmiennej miały swój *czas życia* ograniczony do jednego zakresu (*scope*) - fragmentu kodu, najczęściej wydzielonego klamrami, np. ciała funkcji, czy wnętrza pętli. Zmienne te były tworzone w sekcji pamięci operacyjnej zwanej *stosem*. Zmienne i obiekty takie są automatycznie usuwane w momencie wyjścia poza *scope*, w którym zostały zaalokowane, np. opuszczenia funkcji. W większości przypadków jest to działanie pożądane i zwalnia programistę z konieczności ręcznego zarządzania pamięcią.
 
-Zmienne i obiekty alokowane na stosie są usuwane w momencie wyjścia poza zakres (*scope*), w którym zostały zaalokowane. W większości przypadków jest to działanie pożądane. Istnieją jednak przypadki, w których wskazane jest oddzielenie czasu życia obiektu od zakresu w którym został on utworzony. W tym celu używamy alokacji na stercie.
+Istnieją jednak przypadki, w których wskazane jest oddzielenie czasu życia obiektu od zakresu w którym został on utworzony. W tym celu używamy alokacji na *stercie*.
 
-W celu alokacji zmiennych na stercie klasycznie używano operatora `new`. Tak utworzoną zmienną należało następnie usunąć za pomocą operatora `delete`. Jako, że o operacji dealokacji łatwo zapomnieć, wiele programów do dziś przejawia problem nazywany **wyciekiem pamięci**.
+W celu alokacji zmiennych na stercie klasycznie używano operatora `new`. Tak utworzoną zmienną należało następnie usunąć za pomocą operatora `delete`. Jako że o operacji dealokacji łatwo zapomnieć, wiele programów do dziś przejawia problem nazywany **wyciekiem pamięci**.
 
 ---
 #### Zadanie do realizacji
@@ -21,7 +21,7 @@ std::getchar();
 
 ---
 
-W celu unikania wycieków pamięci w C++11 wprowadzono nowe typy, w tym `std::unique_ptr` oraz `std::shared_ptr`. W tej instrukcji pominiemy `std::shared_ptr`, ponieważ służy on do przechowywania obiektów, które mają wielu właścicieli (na przykład znajdują się jednocześnie w więcej niż jednym wektorze). Dla `std::unique_ptr` nie może być kopiowany - obiekt na który wskazuje ma tylko jednego właściciela.
+W celu unikania wycieków pamięci, w C++11 wprowadzono nowe typy, w tym `std::unique_ptr` oraz `std::shared_ptr`. W tej instrukcji pominiemy `std::shared_ptr`, ponieważ służy on do przechowywania obiektów, które mają wielu właścicieli (na przykład znajdują się jednocześnie w więcej niż jednym wektorze). Dla `std::unique_ptr` nie może być kopiowany - obiekt na który wskazuje ma tylko jednego właściciela.
 
 `std::unique_ptr` to stosunkowo nieskomplikowana klasa, która, w sporym uproszczeniu, w konstruktorze wykonuje alokację obiektu przy pomocy `new`, a w destruktorze niszczy go za pomocą `delete`. Zastępując wykorzystywanie zwykłych wskaźników w stylu języka C użyciem `std::unique_ptr` można łatwo zapobiec wyciekom pamięci. Zmienna typu `std::unique_ptr` wywoła `delete` na przechowywanym wskaźniku kiedy wyjdzie z zakresu, w którym została zadeklarowana.
 
