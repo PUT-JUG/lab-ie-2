@@ -191,8 +191,14 @@ Zadanie
 -----------
 #### 1. Labirynt
 
-Wykorzystując dostarczone tekstury
+Wykorzystując dostarczone tekstury zbuduj grę *Labirynt*
 
+* ustaw tło gry
+* dodaj do sceny kilka obiektów - ścian z odpowiednią teksturą
+* dodaj postać, którą będziesz mógł poruszać klawiszami kursora
+* dodaj detekcję kolizji tak, aby niemożliwe było przechodzenie przez ściany
+
+Ostateczny efekt powinien być podobny do tego na [filmie](../resources/labyrinth.mov).
 
 
 ***
