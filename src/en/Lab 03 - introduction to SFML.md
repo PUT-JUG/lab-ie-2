@@ -27,7 +27,11 @@ Try to compile the project again. This time, errors like *unresolved external sy
 
 ```
 LIBS += -L"C:/SFML-2.5.1/lib"
-LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window
+CONFIG(debug, debug|release){
+    LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-system-d -lsfml-window-d
+} else {
+    LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window
+}
 ```
 
 Restart *qmake*, then compile the project. The compilation should run without errors, but you will still not be able to run the program.

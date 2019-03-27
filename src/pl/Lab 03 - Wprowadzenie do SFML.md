@@ -27,7 +27,11 @@ Ponownie spróbuj skompilować projekt. Tym razem błędy typu *unresolved exter
 
 ```
 LIBS += -L"C:/SFML-2.5.1/lib"
-LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window
+CONFIG(debug, debug|release){
+    LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-system-d -lsfml-window-d
+} else {
+    LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window
+}
 ```
 
 Ponownie uruchom *qmake*, a następnie skompiluj projekt. Kompilacja powinna przebiec bez błędów, jednak nadal nie będzie możliwe uruchomienie programu.
