@@ -104,7 +104,7 @@ Możemy rozwiązać ten problem przechwytując wyjątek klauzulą `try...catch` 
 ```cpp
 for (int i = 0; i < vehicles.size(); i++) {
     Car *some_car = dynamic_cast<Car *>(vehicles[i].get());
-    if (some_car) { // cast successful
+    if (some_car != nullptr) { // cast successful
         std::cout << i << ": abs=" << some_car->has_abs() << std::endl;
     } else { // nope
         std::cout << i << ": not a Car" << std::endl;
