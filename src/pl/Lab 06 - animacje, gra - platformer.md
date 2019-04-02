@@ -19,9 +19,9 @@ AnimatedSprite hero;
 
 /* add texture, set parameters, etc. */
 
-hero.add_animation_frame(sf::Rect(0, 0, 32, 32)); // first frame of animation
-hero.add_animation_frame(sf::Rect(32, 0, 32, 32)); // second frame
-hero.add_animation_frame(sf::Rect(64, 0, 32, 32)); // third frame
+hero.add_animation_frame(sf::IntRect(0, 0, 32, 32)); // first frame of animation
+hero.add_animation_frame(sf::IntRect(32, 0, 32, 32)); // second frame
+hero.add_animation_frame(sf::IntRect(64, 0, 32, 32)); // third frame
 ```
 
  Analogicznie do poprzednich klas, ma ona mieć metodę `step`, dzięki której będzie możliwe informowanie obiektu o czasie jaki upłynął. Klasa na podstawie tego czasu oraz wewnętrznego parametru opisującego liczbę klatek na sekundę, powinna decydować, czy ma nastąpić przełączenie na kolejną klatkę animacji.
