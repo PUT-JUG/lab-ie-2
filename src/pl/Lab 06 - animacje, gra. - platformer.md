@@ -52,6 +52,7 @@ Bazując na kodzie służącym do wykrywania kolizji w zadaniu z poprzednich zaj
 * dodaj do sceny kilka obiektów - platform z odpowiednią teksturą
 * dodaj postać - `AnimatedSprite`, którą będziesz mógł poruszać klawiszami kursora w lewo i w prawo, ustal dla niej grawitację
 * dodaj kod wykrywający kolizje pomiędzy postacią a którąkolwiek z platform, tak aby postać mogła stać na platformach
+* dodaj skakanie - jeśli postać dotyka podłoża, nadaj jej prędkość początkową w górę
 
 ***
 Autorzy: *Jakub Tomczyński*
