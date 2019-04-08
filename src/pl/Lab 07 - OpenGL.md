@@ -38,6 +38,7 @@ Przeanalizuj działanie przykładowego kodu. Sprawdź działanie funkcji `glTran
 Aplikacje OpenGL wykorzystują układ współrzędnych do lokalizacji obiektów na scenie. Aby uniknąć konieczności ręcznego przeliczania położeń wierzchołków obiektów na scenie, układ ten można transformować (m.in. przesuwać i obracać):
 * `glTranslated(double x, double y, double z)` - przesuwa układ współrzędnych o odległości podane jako argumenty,
 * `glRotated(double angle, double x, double y, double z)` - obraca układ współrzędnych o kąt `angle` (w stopniach) wokół osi zdefiniowanej przez parametry `x`, `y`, `z`.
+
 Należy pamiętać, że kolejność ma istotne znaczenie. Rozważ poniższe przykłady:
 
 * w pierwszej kolejności wykonano operację translacji (przesunięcia), a następnie rotacji (obrotu):
@@ -70,6 +71,14 @@ Dodaj do sceny dwa dodatkowe sześciany o różnych wielkościach. Każdy z nich
 
 Poza przesuwaniem i obracaniem układu można go również skalować (funkcja `glScaled()`).
 
+---
+#### Zadanie do realizacji
+Korzystając z pętli zdarzeń dodaj do programu możliwość przesuwania kamery w poziomie klawiszami *WSAD* oraz oddalania/przybliżania widoku kółkiem myszy (event `sf::Event::MouseWheelScrolled` oraz pole `event.mouseWheelScroll.delta`).
+
+*Podpowiedź*: zamiast przesuwać kamerę możesz zmodyfikować (przesuwać i skalować) układ współrzędnych, w którym rysowane są wszystkie obiekty.
+
+---
+
 
 Zadanie
 -----------
@@ -77,9 +86,9 @@ Zadanie
 
 Napisz program obrazujący ruch planet w Układzie Słonecznym.
 
-Napisz klasę reprezentującą planetę - aby lepiej widzieć ruch obrotowy planet, możesz reprezentować je jako sześciany.
+Napisz klasę `CelestialBody` reprezentującą ciało niebieskie - aby lepiej widzieć ruch obrotowy planet, możesz reprezentować je jako sześciany.
 
-Cechy planety:
+Cechy ciała niebieskiego:
 
 * średnica
 * odległość od słońca
@@ -87,11 +96,12 @@ Cechy planety:
 * okres ruchu obiegowego
 * kolor powierzchni
 
-Klasa powinna mieć minimum metodę `step(float time)` (analogicznie do programów z poprzednich zajęć) oraz `draw()` powodującą narysowanie planety.
+Klasa powinna mieć metodę `step(float time)` (analogicznie do programów z poprzednich zajęć) oraz `draw()` powodującą narysowanie planety.
 
 Zastanów się nad kolejnością transformacji potrzebnych do narysowania planety w odpowiednim miejscu i o odpowiednim kącie obrotu (podpowiedź: nie potrzebujesz trygonometrii!).
 
-Wczytaj zawartość pliku [solar_system.txt](../resources/solar_system.txt) i na jego podstawie utwórz obiekty na scenie reprezentujące wszystkie planety i słońce. Zastosuj odpowiednią skalę dla odległości oraz czasu, tak aby uzyskać czytelny efekt.
+Wczytaj zawartość pliku [solar_system.txt](../resources/solar_system.txt) i na jego podstawie utwórz obiekty na scenie reprezentujące wszystkie planety i słońce. **Uwaga:** odległości i średnice w pliku są zmodyfikowane tak, aby wizualizacja pozostała czytelna. Prawdziwe wartości można znaleźć w pliku [solar_system_real.txt](../resources/solar_system_real.txt)
+
 
 
 ***
