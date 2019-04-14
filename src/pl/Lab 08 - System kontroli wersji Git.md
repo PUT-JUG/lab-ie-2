@@ -1,4 +1,4 @@
-# System kontroli wersji Git, GitHub Desktop
+# System kontroli wersji Git
 
 ## System kontroli wersji
 
@@ -137,3 +137,6 @@ Możesz także usunąć repozytorium stworzone w czasie laboratorium, aby nie za
 * Czym jest plik *.gitignore* i co zawiera? Zmodyfikuj plik *.gitignore* tak, aby zmiany w plikach *.pro.user* nie były śledzone. Korzystając z serwisu GitHub.com usuń z repozytorium wcześniej dodany plik *.pro.user*
 * Czasami w czasie wspólnej pracy nad jednym plikiem może dojść do konfliktu. Dlaczego? W takiej sytuacji wykonywana jest operacja *merge*. Dowiedz czym jest *merge*, jak się go stosuje i jak sobie z tym radzić!
 * Zastanów się jakie pliki mogą znaleźć się w repozytorium? Czy odpowiednie jest wrzucanie plików .exe lub .bin? Czy można wrzucić do repozytorium projekt spakowany za pomocą .zip? Dlaczego odpowiedź na powyższe pytania jest przecząca? Które pliki definiujące projekt/środowisko programistyczne powinny znaleźć się w repozytorium?
+
+***
+Autorzy: *Michał Fularz*, *Tomasz Mańkowski*, *Jakub Tomczyński*
