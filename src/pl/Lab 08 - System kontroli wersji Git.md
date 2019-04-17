@@ -19,7 +19,7 @@ Zwyczajowo obsługa systemu kontroli wersji odbywa się za pomocą programu `git
 
 **Pamiętaj aby po skończonych laboratoriach wylogować się w programie!**
 
-Warto upewnić się, że program GitHub Desktop ma odpowiednio ustawioną tożsamość użytkownika (w laboratorium z programu korzysta wiele osób). Dzięki temu wygrywane do repozytorium zmiany będą markowane naszą nazwą użytkownika i adresem e-mail. W tym celu z menu *File* wybierz *Options…* (jeśli menu nie jest widoczne, możesz użyć skrótu *Ctrl*+*,*):
+Warto upewnić się, że program GitHub Desktop ma odpowiednio ustawioną tożsamość użytkownika (w laboratorium z programu korzysta wiele osób). Dzięki temu wgrywane do repozytorium zmiany będą markowane naszą nazwą użytkownika i adresem e-mail. W tym celu z menu *File* wybierz *Options…* (jeśli menu nie jest widoczne, możesz użyć skrótu *Ctrl*+*,*):
 
 ![](../images/git_options.png)
 
@@ -33,7 +33,7 @@ GitHub Desktop służy do zarządzania lokalnymi repozytoriami znajdującymi si�
 
 ![](../images/git_create.png)
 
-Następnie nadaj nazwę swojemu repozytorium: *hello-git-nazwisko* (nie używaj w nazwie repozytorium "polskich" znaków!) i wybierz lokalizację, w której zostanie utworzony nasz projekt. Następnie wybierz konfigurację Git Ignore. Warto wskazać używany język, np. C++ (dowiedz się czym jest plik .gitigonore). Utwórz lokalne repozytorium klikając *Create Repository*.
+Następnie nadaj nazwę swojemu repozytorium: *hello-git-nazwisko* (nie używaj w nazwie repozytorium "polskich" znaków!) i wybierz lokalizację, w której zostanie utworzony nasz projekt. Następnie wybierz konfigurację Git Ignore. Warto wskazać używany język, np. C++ (dowiedz się czym jest plik .gitignore). Utwórz lokalne repozytorium klikając *Create Repository*.
 
 Obejrzyj zawartość folderu z utworzonym repozytorium. Zauważ, że pojawił się ukryty folder *.git*. Zastanów się co zawiera?
 
@@ -96,7 +96,7 @@ a następnie:
 
 ![](../images/git_pull.png)
 
-Wykonanie tych operacji odpowiada wykonaniu komend `git fetch` oraz `git pull`. W folderze naszego projektu powinien być już widoczny plik *README*.
+Wykonanie tych operacji odpowiada wykonaniu komend `git fetch` oraz `git merge`. W folderze naszego projektu powinien być już widoczny plik *README*.
 
 Wysyłanie kolejnych zmian do zdalnego repozytorium jest równie proste. Otwórz projekt w środowisku Qt Creator i zmodyfikuj program, tak aby rysował trzy kostki. Wróć do GitHub Desktop i wyślij zmiany dodając nowy *commit* (i opisując wprowadzone zmiany) i wypchnij (*push*) zmiany na serwer.
 
