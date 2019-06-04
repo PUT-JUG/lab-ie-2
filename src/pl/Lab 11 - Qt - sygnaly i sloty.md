@@ -96,10 +96,38 @@ ButtonWidget::ButtonWidget(const QStringList &texts, QWidget *parent)
 W powyższym przykładzie slot `clicked` jest wywoływany z argumentem `text`.
 
 ## Przebieg zajęć
-Zapoznaj się z dwoma tutorialami i spróbuj zrealizować samodzielnie te same zadania:
+<!--Zapoznaj się z dwoma tutorialami i spróbuj zrealizować samodzielnie te same zadania:
 * Do projektu dodaj modalne okno dialogowe oraz menu i pasek narzędzi. (http://youtu.be/3Are6Iu0XWg )
 * Stwórz wirtualną klawiaturę o przełączanym układzie (klawiatura literowa i numeryczna) (http://youtu.be/UVg28aVpBXI)
-* Spróbuj dodać do drugiego projektu okno dialogowe umożliwiające zmianę liczby kolumn klawiatury numerycznej i literowej.
+* Spróbuj dodać do drugiego projektu okno dialogowe umożliwiające zmianę liczby kolumn klawiatury numerycznej i literowej.-->
+
+### Edytor tekstu
+
+Wykorzystując Qt napisz prosty edytor tekstu.
+
+Edytor powinien pozwalać na:
+* utworzenie nowego dokumentu
+* otwarcie pliku
+* nadpisanie pliku 
+* zapisanie pliku jako nowy
+
+Dodaj odpowiednie widgety do okienka i akcje do menu *File*.
+
+Do wskazania plików wykorzystaj klasę [QFileDialog](https://doc.qt.io/qt-5/qfiledialog.html).
+
+Wczytaj całą zawartość otwartego pliku do okienka tekstowego (do operacji na plikach służy klasa [Qfile](https://doc.qt.io/qt-5/qfile.html)).
+
+Umożliw nadpisanie pliku (zapisanie pod tą samą ścieżką) lub zapisanie jako nowy plik.
+
+***
+
+Następnie dodaj do programu funkcjonalność *Find and replace*. Utwórz klasę okienka (*File* → *New File or Project* → *Qt* → *Qt Designer Form Class* → *Widget*), w którym będziesz mógł wprowadzić dwa ciągi znaków (źródłowy i docelowy) oraz dwa przyciski: *Replace* i *Replace all*.
+
+Dodaj menu *Edit*, a w nim akcję *Find and replace*.
+
+Połącz ich sygnały ze slotami w głównym okienku i zaimplementuj wymaganą funkcjonalność.
+
+Możesz wspomagać się tutorialem [Application Example](https://doc.qt.io/qt-5/qtwidgets-mainwindows-application-example.html).
 
 ***
 Autorzy: *Tomasz Mańkowski*, *Jakub Tomczyński*, *Dominik Pieczyński*
