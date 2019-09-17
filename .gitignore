@@ -1,2 +1,4 @@
 public/**/*.html
 !public/**/_*.html
+public/images/*
+public/resources/*

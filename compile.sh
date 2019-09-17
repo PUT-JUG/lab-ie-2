@@ -8,6 +8,12 @@ find . -name "*.html" | while read f ; do
 	fi
 done
 
+rm -rf ./public/images
+rm -rf ./public/resources
+
+cp -r ./src/images/. ./public/images
+cp -r ./src/resources/. ./public/resources
+
 cd src
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
