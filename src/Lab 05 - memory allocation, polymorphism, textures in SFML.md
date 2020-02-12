@@ -140,7 +140,7 @@ There are many websites with free multimedia resources such as textures, sprites
 
 **Remember** - if you are using graphics downloaded from the Internet, check the license under which resources have been made available. Often, the authors expect only the so-called *attribution* - small mention in program information, where the resources come from and who created them.
 
-The links to a few textures that you can start with are: [grass](./resources/grass.png), [wall](./resources/wall.png), [guy](./resources/guy.png).
+The links to a few textures that you can start with are: [grass](./_resources/grass.png), [wall](./_resources/wall.png), [guy](./_resources/guy.png).
 
 ---
 
@@ -196,7 +196,7 @@ Use the supplied textures to build a *Labyrinth* game.
 * Add a character that you can move with the cursor keys.
 * Add collision detection so that it is impossible to pass through walls.
 
-The final effect should be similar to that in [the film](./resources/labyrinth.mov).
+The final effect should be similar to that in [the film](./_resources/labyrinth.mov).
 
 
 ***

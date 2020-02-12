@@ -155,7 +155,7 @@ By double-clicking on any file with the `.ui` extension (in our case `mainwindow
 
 On the left side there is a vertical bar containing a list of standard Qt widgets. Widgets are grouped depending on the basic functionality. At the top there is also a Filter bar that allows you to search the list:
 
-![](./images/qt_widgets_list.png)
+![](./_images/qt_widgets_list.png)
 
 * Familiarize yourself with the list of widgets. Are all their names, including drawings, clear enough to explain how they work? If necessary, use Google search engine.
 
@@ -167,7 +167,7 @@ On the right side of Qt Designer there is a *Property Editor*, which is a set of
 
 Each widget must have a unique name within the window. The name is given by editing the *objectName* property:
 
-![](./images/qt_object_name.png)
+![](./_images/qt_object_name.png)
 
 * Change the *objectName* for each widget in the window (e.g.: `QPushButton`: *addButton*; `QLineEdit`: *inputValue1*, *inputValue2*; `QLabel`: *result*).
 
@@ -199,7 +199,7 @@ It is possible to nest one layout inside another:
 
 * Try to place the elements on the window so that the following effect can be achieved:
 
-![](./images/qt_layout_nested.png)
+![](./_images/qt_layout_nested.png)
 
 * Test how the program works.
 
@@ -213,7 +213,7 @@ An important widget, which builds the layout of the window, is *Spacer*, i.e. fi
 
 * Use the *Horizontal Layout* and *Horizontal Spacer* to move the result (`QLabel`) to the right edge of the window:
 
-![](./images/qt_spacer.png)
+![](./_images/qt_spacer.png)
 
 ## Signals and Slots
 

@@ -15,7 +15,7 @@ LIBS += -lOpenGL32 -lglu32
 
 ### First OpenGL + SFML program
 
-Create a project to work with SFML and OpenGL. Place the `main.cpp` file in the project with the content taken from the [sfml_hello.cpp](./resources/sfml_opengl.cpp).
+Create a project to work with SFML and OpenGL. Place the `main.cpp` file in the project with the content taken from the [sfml_hello.cpp](./_resources/sfml_opengl.cpp).
 
 Start the program. A rotating color cube should appear on the screen.
 
@@ -43,11 +43,11 @@ Remember that the order is important. Consider the following examples:
 
 * first the translation (shift) and then the rotation operation was performed:
 
-![Translation then rotation](./images/lab_07_translation_rotation.png)
+![Translation then rotation](./_images/lab_07_translation_rotation.png)
 
 * in the second example, the same transformations were carried out, but in the reverse order, first the rotation and then the translation.
 
-![Rotation then translation](./images/lab_07_rotation_translation.png)
+![Rotation then translation](./_images/lab_07_rotation_translation.png)
 
 As a result, performing the same operations (but in a different order) gives a different effect - compare the position and orientation of the airplane in both cases.
 
@@ -58,7 +58,7 @@ Note that for each `glPushMatrix()` call, one `glPopMatrix()` must be called. Th
 
 Consider the example shown in the figure below:
 
-![Rotation then translation](./images/lab_07_push_pop.png)
+![Rotation then translation](./_images/lab_07_push_pop.png)
 
 We plan to draw two airplanes - in point *(4, 4)* and then *(2, 1)*. Without using the `glPushMatrix()` / `glPopMatrix()` functions (operations shown above the image) it is necessary to calculate how to move from *(4, 4)* to *(2, 1)*. In this example this seems easy, but there may be more transformations, including rotations that complicate the task.
 Using the `glPushMatrix()` / `glPushMatrix()` functions (operations shown below the image), the task is less complicated - no reverse transformations are required - it is enough to remember the current state first and then return to it.
@@ -100,7 +100,7 @@ The class should have a `step(float time)` method (similar to the programs from 
 
 Think about the order of the transformations needed to draw the planet in the right place and with the right rotation angle (hint: you don't need trigonometry!).
 
-Load the [solar_system.txt](./resources/solar_system.txt) file and use it to create objects on the scene representing all planets and the sun. **Note:** the distances and diameters in the file are modified so that the visualization remains readable. Real values can be found in the [solar_system_real.txt](./resources/solar_system_real.txt) file.
+Load the [solar_system.txt](./_resources/solar_system.txt) file and use it to create objects on the scene representing all planets and the sun. **Note:** the distances and diameters in the file are modified so that the visualization remains readable. Real values can be found in the [solar_system_real.txt](./_resources/solar_system_real.txt) file.
 
 
 ***

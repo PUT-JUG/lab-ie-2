@@ -16,11 +16,11 @@ In order to use the debugger in an environment other than Visual Studio, install
 
 The first step is to run the Apps & features settings. Then select the *Modify* option for the *Windows Software Development Kit*:
 
-![](./images/modify_sdk.png)
+![](./_images/modify_sdk.png)
 
 When in the wizard, select: *Change*, and then add the selection to the *Debugging Tools for Windows* component:
 
-![](./images/debugging_tools.png)
+![](./_images/debugging_tools.png)
 
 After clicking the *Change* button the component will be installed.
 
@@ -37,7 +37,7 @@ During the installation, at the stage of components selection (Select Components
 
 To create a new project in the QtCreator environment, select *New File or Project...* from the *File* menu. This will open a window where you can select Non-Qt Project &rarr; Plain C++ Application:
 
-![](./images/new_project.png)
+![](./_images/new_project.png)
 
 In the next step you should give the project a name of your choice **not using Polish characters**. Subsequent configuration steps should be completed while maintaining the default settings.
 
@@ -45,8 +45,8 @@ In the next step you should give the project a name of your choice **not using P
 
 You can add new header and source files to a QtCreator project by right-clicking on the project name and selecting *Add new*:
 
-![](./images/add_new.png)
+![](./_images/add_new.png)
 
 This displays the following window, which, after selecting the file type and going further, allows you to give it a name:
 
-![](./images/new_file.png)
+![](./_images/new_file.png)

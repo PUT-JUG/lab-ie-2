@@ -21,17 +21,17 @@ Usually, the version control system is controlled with a `git` program called fr
 
 Make sure that GitHub Desktop has the user identity set properly (many people use the program in the lab). Thanks to this, the changes uploaded to the repository will be marked with your username and e-mail address. To do this, select *Options...* from the *File* menu (if the menu is not visible, you can use the *Ctrl*+*,* shortcut):
 
-![](./images/git_options.png)
+![](./_images/git_options.png)
 
 Then edit the name and email address in the Git tab:
 
-![](./images/git_credentials.png)
+![](./_images/git_credentials.png)
 
 ## Creating a repository
 
 GitHub Desktop is used to manage local repositories located on your computer's hard drive. The first step that allows us to work is to create a local repository in our project folder. To do so click:
 
-![](./images/git_create.png)
+![](./_images/git_create.png)
 
 Then name your repository: *hello-git-name* (don't use "Polish" characters in the name of the repository!) and select the location where your project will be created. Select the Git Ignore configuration. It is worth to choose the language used, e.g. C++ (find out on your own what the .gitignore file is). Create a local repository by clicking *Create Repository*.
 
@@ -39,11 +39,11 @@ View the contents of the folder with the repository created. Note that a hidden 
 
 In the upper left corner there is a drop-down list of repositories:
 
-![](./images/git_repo_list.png)
+![](./_images/git_repo_list.png)
 
 You can select the current repository you are working with from it. At this point our repository only exists on the local computer. You should place it on the GitHub server. To do this, click on it:
 
-![](./images/git_publish.png)
+![](./_images/git_publish.png)
 
 If we have not logged in to GitHub yet, we will be asked to do so.
 
@@ -57,15 +57,15 @@ Let's make sense of our first repository! In the *hello-git-name* project folder
 
 Return to GitHub Desktop. Note that the program has automatically detected changes in the files. A list of modified files and the content of the modifications is displayed. Changes should include 3 files: *main.cpp*, *.pro* and *.pro.user*:
 
-![](./images/git_changes.png)
+![](./_images/git_changes.png)
 
 Time to send changes to the GitHub service. In order to do so, in the "Summary" field, put a description of the changes made, every time you make a new change, you should put a short comment on the work done in the code. Make a commit of changes using the button:
 
-![](./images/git_commit.png)
+![](./_images/git_commit.png)
 
 At this point, we have informed the local repository of the changes we have made, but they still need to be sent to the server (push). To do so, press the button:
 
-![](./images/git_push.png)
+![](./_images/git_push.png)
 
 The actions performed above correspond to the execution of commands:
 
@@ -80,21 +80,21 @@ Return to the GitHub website, open the repository and see if all the files have 
 
 Each repository should contain a *README* file. GitHub.com provides a simple online tool for easy editing. To add a *README* file, log in via your browser and click on it:
 
-![](./images/git_add_readme.png)
+![](./_images/git_add_readme.png)
 
 Fill in the *README* file with content containing the name of the repository, the author, the tools used, etc. In *README* files it is possible to use simple tags to format text of the [Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/) type.
 
 Add the file to the repository by "commiting" it:
 
-![](./images/git_commit_new_file.png)
+![](./_images/git_commit_new_file.png)
 
 Changes made on the remote repository can be immediately downloaded to the local repository. To do this, select the *Fetch* option in GitHub Desktop to download information about the current state of the remote repository:
 
-![](./images/git_fetch.png)
+![](./_images/git_fetch.png)
 
 and then:
 
-![](./images/git_pull.png)
+![](./_images/git_pull.png)
 
 The execution of these operations corresponds to the execution of the commands `git fetch` and `git merge`. The *README* file should already be visible in our project folder.
 
@@ -112,11 +112,11 @@ Merge into a group of two with the next colleague and add your profiles to each 
 
 To start working on changing another user's project, you need to *clone* his project (`git clone`). To do this, return to GitHub Desktop and select *Clone repository* from the menu:
 
-![](./images/git_clone_repository.png)
+![](./_images/git_clone_repository.png)
 
 Then find the co-author's repository and click:
 
-![](./images/git_clone.png)
+![](./_images/git_clone.png)
 
 Open the cloned project in the development environment and change the direction of rotation of the cubes.
 

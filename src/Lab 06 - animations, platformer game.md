@@ -25,7 +25,7 @@ hero.add_animation_frame(sf::IntRect(64, 0, 32, 32)); // third frame
 ```
 Similarly to the previous classes, it should contain a `step` method, thanks to which it will be possible to inform the object about the elapsed time. The class, based on this time and the internal parameter describing the number of frames per second, should decide whether to switch to the next frame of the animation.
 
-Create an `AnimatedSprite` object on the scene, using the texture of the character from the [included set of textures](./resources/sprites.zip).
+Create an `AnimatedSprite` object on the scene, using the texture of the character from the [included set of textures](./_resources/sprites.zip).
 
 ---
 
