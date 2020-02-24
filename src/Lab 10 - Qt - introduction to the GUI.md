@@ -1,20 +1,25 @@
-Qt - introduction to the GUI
+# Qt - introduction to the GUI
 
 ## Graphical user interface (GUI)
 
 Graphical User Interface (GUI) is one of many ways for providing information to a computer user and, at the same time, of getting feedback from him/her. Each operating system offers its own GUI manager. Currently, the most popular are:
 
-* Windows: 
+* Windows:
+
     * Luna (XP),
     * Aero (Vista, 7, 8, 8.1, 10),
     * Modern UI (8, 8.1, 10).
-* Linux: 
+
+* Linux:
+
     * Unity (Ubuntu),
     * KDE,
     * GNOME.
+
 * macOS:
+
     * Aqua.
-    
+
 Most modern GUIs are based on so-called widgets, otherwise known as controls. A widget is a single GUI element. It can be: a window, a button, a slider, a field for typing a text and so on. A widget does not necessarily have to be a visible element, for example it can be a container placing other widgets inside a window. Nowadays, most of the available widgets have an object-oriented structure. Each input widget receives user-generated events (mouse clicks, keyboard buttons), as well as system-generated events (including the GUI manager). In response, the widget draws its graphic representation on the screen space assigned to it and/or transfers information from the user to the program and vice versa.
 
 ## Graphical interface library
@@ -136,7 +141,7 @@ It is of course necessary to define the individual elements of the main window c
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent), // calls base class constructor
     ui(new Ui::MainWindow) { // allocates memory for GUI object and calls its constructor
-    
+
     ui->setupUi(this); // initialises GUI
 }
 
@@ -285,9 +290,9 @@ QString text = QString::number(value);
 
 Information about which methods a given widget or object of a given class offers is easiest to obtain from the Qt documentation page, e.g.: http://doc.qt.io/qt-5/qlabel.html 
 
-## Assignments
+## Final assignments 🔥🛠
 
-### 1. Calculator
+#### 1. Calculator
 
 The task is to create a simple graphical calculator. The calculator should have
 
@@ -300,13 +305,13 @@ The task is to create a simple graphical calculator. The calculator should have
 
 <!--Jeden przycisk QPushButton przepisujący wartość z pola wyniku do pierwszego pola wejściowego. Na przycisku zamiast opisu umieść grafikę strzałki symbolizującą opisaną operację. Wykorzystaj QPushButton::SetIcon( );  (poszukaj w Internecie jak wykonać).-->
 
-### 2. Advanced calculator
+#### 2. Advanced calculator
 
 Create a calculator similar to the one available in Windows. The window should have a field where you can enter the value manually using the keyboard, or using the 0 to 9 buttons below. To format the `QLineEdit` input value, use its `inputMask` property.  Each press of the numeric button adds the appropriate value at the end of the input window. Try using `QButtonGroup`.  Create a second group of buttons responsible for selecting the type of action and displaying the result.
 
-### 3. Database editor
+#### 3. Database editor
 
 Create a program that is an interface to the student database. The user should be able to add a new entry using the fields: Name, Surname, E-mail, Index No., Man/Woman (QRadioButton), Field of study (drop-down list - QComboBox), Graduated (QCheckBox), Note (QPlainTextEdit). Create a student class containing the above information and add new entries to QVector. The list of available entries should be displayed in the QListView. Add the ability of previewing and deleting the selected entry.
 
-***
+---
 Authors: *Tomasz Mańkowski*, *Jakub Tomczyński*

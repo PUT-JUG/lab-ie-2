@@ -1,8 +1,7 @@
-Classes - operators, conversions
-================================
+# Classes - operators, conversions
 
-Rational class
--------------------------------------------
+## Rational class
+
 Let's design `Rational` class that will operate on decimal fractions. We can divide programming of such class into three stages:
 
 ### Establishing requirements for the class
@@ -14,6 +13,7 @@ Let's design `Rational` class that will operate on decimal fractions. We can div
 ### Establishing the *interface*
 
 The class should contain methods allowing:
+
 * setting numerator and denominator of the fraction
 * getting the values of enumerator and denominator
 * setting the values of enumerator and denominator separately
@@ -30,7 +30,7 @@ Let's split the code into header and source file. If the method's implementation
 class Rational {
 public:
     Rational(int num = 0, int den = 1); // default constructor
-    
+
     void set(int num, int den); // sets numerator and denominator
     int num() const; // gets numerator
     int den() const; // gets denominator
@@ -114,14 +114,15 @@ one_third.print(); std::cout << " - "; quarter.print(); std::cout << " = "; sub_
 ```
 
 
-Operator overloading
------------------------------------
+## Operator overloading
 
 The previously created class allows performing operations on fractions, but is not as convenient as built-in C++ types:
+
 ```cpp
 int a = 1, b = 2;
 int c = a + b;
 ```
+
 C++ language allows defining (overloading) operators in custom classes in order for them to perform operations defined by programmer. Functions that overload operators can take as many arguments as they take in case of built-in types. The precedence of the operators works the same as with built-in types. It means that the order of `d = a + b * c` execution always looks like this: `a + (b * c)`. The operators are only graphic symbols and they can perform any operations; however, it is advised for the overloaded operators to perform operations similar to the original ones to keep the clarity. For example: `+` operator performing printing or subtraction may by very confusing.
 
 The declaration of operator overload looks similar to a method declaration:
@@ -129,6 +130,7 @@ The declaration of operator overload looks similar to a method declaration:
 ```cpp
 return_type operator#(arguments list)
 ```
+
 where `#` is the overloaded operator
 
 Example operators of addition and subtraction for the `Rational` class can look following (similar to `add` and `subtract` methods):
@@ -151,14 +153,18 @@ Rational Rational::operator-(const Rational &rhs) const {
                     den_ * rhs.den_);
 }
 ```
+
 The code performing the computations can look as follows:
+
 ```cpp
 add_result = one_third + quarter;
 sub_result = one_third - quarter;
 ```
 
 ---
-#### Assignment
+
+#### 🛠🔥 Assignment 🔥🛠
+
 Add the operators mentioned above to the `Rational` class.
 Prepare the implementation of multiplication operator (`*`). Check if it works correctly.
 
@@ -192,21 +198,24 @@ std::ostream &operator<<(std::ostream &str, Rational &rhs){
 Add the code above to the `Rational.cpp` file.
 
 Free functions, as we already know, cannot access private fields of a class. Because of that fact we need to declare a friendship between class and function. Add the following code inside the `Rational` class declaration:
+
 ```cpp
 friend std::ostream &operator<<(std::ostream &str, Rational &rhs);
 ```
 
 ---
-#### Assignment
+
+#### 🛠🔥 Assignment 🔥🛠
+
 Add `>>` operator overload to `Rational` class. It should allow pulling the fraction from the `istream` type stream (for example from the console using `cin`).
 Two possible input formats are:
+
 * integral numbers, for example: `5`
 * fraction, for example: `7/22`
 
 ---
 
-Type conversions
------------------------------------
+## Type conversions
 
 In many cases the compiler that won't be able to find the function that exactly matches the set of passed parameters will perform *implicit conversion* to the matching type. Because of that it is possible to execute the code:
 
@@ -241,6 +250,7 @@ Rational::Rational(double r) {
     den_ = den;
 }
 ```
+
 and *to* other type in the form of operator with target type symbol:
 
 ```cpp
@@ -258,12 +268,12 @@ After adding the conversions above it is even possible to execute the following 
 ```cpp
 Rational p = one_third / quarter;
 ```
+
 Why the code above works? Is the result correct?
 
 [//]: # (Skipped: explicit)
 
-Assignments
------------
+## Final assignments 🔥🛠
 
 #### 1. `Time` class
 
@@ -288,19 +298,22 @@ int t3s = t3; // 36521
 Write a program that will allow generation invoices in the console. Split the functionality into classes:
 
 `Invoice` - class the describes the invoice, includes the following attributes:
+
 * NIP number (10 digits) of seller and buyer
 * the set of bought items
 
 The invoice in its' simplest form should allow adding elements and "printing" of all information.
 
 `Item` - class describing single item from the invoice, includes the following attributes:
+
 * name
 * unit net price
 * VAT tax type ("A" – 23%, "B" – 8%, "C" – 0%)
 * the amount sold
 
 The example invoice after "printing" can look following:
-```
+
+```plaintext
 ------------------VAT invoice------------------
 ===============================================
 Seller: 7770003699      Buyer: 0123456789
@@ -328,5 +341,5 @@ std::cout << inv << std::endl;
 
 Implement addition operator for invoices (check if the NIP numbers are the same and merge items from both invoices). Think about how to store the positions inside the invoice to find the matching elements easily.
 
-***
+---
 Authors: *Jakub Tomczyński*, *Michał Fularz*, *Rafał Kabaciński*, *Piotr Kaczmarek*, *Michał Nowicki*, *Jan Wietrzykowski*, *Dominik Pieczyński*

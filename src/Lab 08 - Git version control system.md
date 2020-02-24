@@ -130,7 +130,7 @@ It is also useful to remove local repositories from your computer's hard drive a
 
 You can also delete a repository created during the lab to avoid cluttering your GitHub profile (*Settings* &rarr; *Options* &rarr; *Danger Zone* &rarr; *Delete this repository*).
 
-## Assignments
+## Final assignments 🔥🛠
 
 * Read the tutorial to the GitHub: https://guides.github.com/. Read and understand topics up to and including *Be Social*.
 * What is the *.git* folder and what does it contain?
