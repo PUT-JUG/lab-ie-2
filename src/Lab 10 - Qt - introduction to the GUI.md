@@ -92,7 +92,7 @@ Name your project and select a location, press *Next*.
 
 The next window allows you to define the name of the class that will be the base of our window application. Usually this base class is the *MainWindow* widget (remember that the window is also a widget), which is the main window of the application. The name of the main window can be changed. It is important that our class inherits from *QMainWindow* (see: *Base class*). Make sure that *Generate form* is checked, so the wizard will automatically create a file describing the appearance of the main window. Press *Next*. In next window option for choosing a language translation appears, this part we can skip by pressing *Next*. Following window allows for choosing a tools kit, this part is similar to one described in [Lab 01 - semester I](http://jug.put.poznan.pl/lab-ie-1/01%20-%20Hello%20World.html). Press *Finish*.
 
-## The skeleton of the window program at Qt
+## The template of the window program using Qt
 
 Creating a project from a window application template will add additional files describing the main window to the project: `mainwindow.h` and `mainwindow.cpp` describing the window class from the code side and the file `mainwindow.ui` containing the description of the window layout (appearance).
 
