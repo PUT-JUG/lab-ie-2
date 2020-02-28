@@ -90,7 +90,7 @@ Open Qt Creator, then select *File* → *New File or Project...*. In the *Projec
 
 Name your project and select a location, press *Next*.
 
-The next window allows you to define the name of the class that will be the base of our window application. Usually this base class is the *MainWindow* widget (remember that the window is also a widget), which is the main window of the application. The name of the main window can be changed. It is important that our class inherits from *QMainWindow* (see: *Base class*). Make sure that *Generate form* is checked, so the wizard will automatically create a file describing the appearance of the main window. Press *Next*, then press *Finish*.
+The next window allows you to define the name of the class that will be the base of our window application. Usually this base class is the *MainWindow* widget (remember that the window is also a widget), which is the main window of the application. The name of the main window can be changed. It is important that our class inherits from *QMainWindow* (see: *Base class*). Make sure that *Generate form* is checked, so the wizard will automatically create a file describing the appearance of the main window. Press *Next*. In next window option for choosing a language translation appears, this part we can skip by pressing *Next*. Following window allows for choosing a tools kit, this part is similar to one described in [Lab 01 - semester I](http://jug.put.poznan.pl/lab-ie-1/01%20-%20Hello%20World.html). Press *Finish*.
 
 ## The skeleton of the window program at Qt
 
@@ -118,41 +118,51 @@ In the Qt library, all objects ultimately inherit from the `QObject` class, no d
 ```cpp
 #include <QMainWindow>
 
-namespace Ui {
-    class MainWindow;
-}
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow
+{
     Q_OBJECT // macro required for Qt meta-object functionality
+
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
 private:
     Ui::MainWindow *ui; // pointer to GUI elements of the window
 };
 ```
 
-It is of course necessary to define the individual elements of the main window class. Qt Creator did it for us automatically and it looks like this:
+It is of course necessary to implement the individual elements of the main window class. Qt Creator did it for us automatically and it looks like this:
 
 ```cpp
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent), // calls base class constructor
-    ui(new Ui::MainWindow) { // allocates memory for GUI object and calls its constructor
-
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent) // calls base class constructor
+    , ui(new Ui::MainWindow) // allocates memory for GUI object and calls its constructor
+{
     ui->setupUi(this); // initialises GUI
 }
 
-MainWindow::~MainWindow() {
+MainWindow::~MainWindow()
+{
     delete ui; // deletes GUI object
 }
 ```
 
 At this stage, the constructor only configures the GUI, while the destructor, called when the application is closed, removes the GUI information from the memory.
 
+---
+
+#### 🛠🔥 Assignment 🛠🔥
+
 Run the program created from the template.
+
+---
 
 ### Using Qt Designer
 
@@ -162,11 +172,17 @@ On the left side there is a vertical bar containing a list of standard Qt widget
 
 ![](./_images/qt_widgets_list.png)
 
+---
+
+#### 🛠🔥 Assignment 🛠🔥
+
 * Familiarize yourself with the list of widgets. Are all their names, including drawings, clear enough to explain how they work? If necessary, use Google search engine.
 
 * Use the drag and drop method to place one `QPushButton`, one `QLabel` and two `QLineEdit` windows on the project. Try to change their location and size.
 
 * Start the program and observe the behavior of the widgets placed in the window.
+
+---
 
 On the right side of Qt Designer there is a *Property Editor*, which is a set of fields allowing you to edit the properties of individual widgets. The information about the focused widget is displayed. Please note that the window itself is also a widget and has its own properties that can be edited in *Property Editor*. Each type of widget will have its own unique set of properties. 
 
@@ -174,7 +190,13 @@ Each widget must have a unique name within the window. The name is given by edit
 
 ![](./_images/qt_object_name.png)
 
-* Change the *objectName* for each widget in the window (e.g.: `QPushButton`: *addButton*; `QLineEdit`: *inputValue1*, *inputValue2*; `QLabel`: *result*).
+---
+
+#### 🛠🔥 Assignment 🛠🔥
+
+Change the *objectName* for each widget in the window (e.g.: `QPushButton`: *addButton*; `QLineEdit`: *inputValue1*, *inputValue2*; `QLabel`: *result*).
+
+---
 
 Widgets also have a number of other functionalities, mainly concerning their appearance:
 
@@ -188,11 +210,21 @@ Widgets also have a number of other functionalities, mainly concerning their app
 
 Widgets placed in the window are in no way related to the size of the window. Always, regardless of the size of the window, they will be anchored in a predefined position and will have a fixed size:
 
-* Run the program and try to resize the window. Are the widgets always visible?
+---
+
+#### 🛠🔥 Assignment 🛠🔥
+
+Run the program and try to resize the window. Are the widgets always visible?
+
+---
 
 Qt has a system for automatically adjusting the position and size of widgets depending on the current appearance of the window they are in, called *Layout*. *Layout* is a widget in which you can place other GUI elements.
 
-The basic method of placing elements on a window using *Layout* is a mechanism built into each window:
+The basic method of placing elements on a window using *Layout* is a mechanism built into each window.
+
+---
+
+#### 🛠🔥 Assignment 🛠🔥
 
 * Right-click on the window and from the context menu select *Lay Out* and then *Lay Out in a Grid*. Elements should be automatically placed in the window. Start the program and check the widgets' behavior during window resizing.
 
@@ -208,9 +240,15 @@ It is possible to nest one layout inside another:
 
 * Test how the program works.
 
+---
+
 Sometimes it is necessary to set a minimum and maximum size for each widget. Therefore you can find the properties of *minimumSize* and *maximumSize* for each widget.
 
 An important widget, which builds the layout of the window, is *Spacer*, i.e. filler. They do not play any role other than adjusting the appearance of the window.
+
+---
+
+#### 🛠🔥 Assignment 🛠🔥
 
 * Test the behavior of the program when changing the *minimumSize* and *maximumSize* of individual widgets.
 
@@ -220,18 +258,28 @@ An important widget, which builds the layout of the window, is *Spacer*, i.e. fi
 
 ![](./_images/qt_spacer.png)
 
+---
+
 ## Signals and Slots
 
 Qt implements a mechanism of signals and slots. It is a tool for managing asynchronous events originating both from the program and from the user or operating system. The use of *signals* and *slots* is very simple. Every class inheriting from the *QObject* in Qt can implement signals, i.e. functions that emit an event, while at the same time every class can implement slots, i.e. functions that capture and process these signals. For example, a `QPushButton` class has a `clicked()` signal that is emitted when user presses a button. 
 
 It is possible to automatically create connections between the GUI elements and the main window class from the Qt Designer level. Qt Creator automatically creates a slot and a connection between the widget signal and this slot:
 
-* Use the right mouse button to select the *addButton* widget (`QPushButton`) and from the context menu select *Go to Slot...*, then select the signal `clicked()` and confirm with OK.
+---
+
+#### 🛠🔥 Assignment 🛠🔥
+
+Use the right mouse button to select the *addButton* widget (`QPushButton`) and from the context menu select *Go to Slot...*, then select the signal `clicked()` and confirm with OK.
+
+---
 
 Qt Creator moves the user to the editing mode, to the position of the `MainWindow` class, where the method called when the button is clicked was created:
 
 ```cpp
-void MainWindow::on_addButton_clicked() {
+void MainWindow::on_addButton_clicked()
+{
+
 }
 ```
 
@@ -246,7 +294,13 @@ private slots:
 };
 ```
 
-* Set breakpoint inside the slot handling method (`void MainWindow::on_AddButton_clicked()`), run the program in Debug mode. Verify the proper operation of the slot.
+---
+
+#### 🛠🔥 Assignment 🛠🔥
+
+Set breakpoint inside the slot handling method (`void MainWindow::on_AddButton_clicked()`), run the program in Debug mode. Verify the proper operation of the slot.
+
+---
 
 ## Access to GUI elements
 
@@ -258,9 +312,15 @@ As in any object-oriented library, all GUI objects have methods to modify their 
 ui->objectName->setText("Hello! This is my first Qt application");
 ```
 
+---
+
+#### 🛠🔥 Assignment 🛠🔥
+
 * Place the above line in the method handling the button click.
 
 * Run the program and check its correctness. The content of the `QLabel` should be changed after clicking a button.
+
+---
 
 Reading the value from `QLineEdit` is done as follows:
 
@@ -268,11 +328,13 @@ Reading the value from `QLineEdit` is done as follows:
 QString text = ui->objectName->text();
 ```
 
+---
+
+#### 🛠🔥 Assignment 🛠🔥
+
 * Modify the program so that every time you press a button, it will cause the content of one of the `QLineEdit` to be written into the `QLabel`.
 
-Next:
-
-* Modify the program so that the value entered in the `QLineEdit` fields is added and displayed in the `QLabel` after pressing the button.
+* Next, modify the program so that the value entered in the `QLineEdit` fields is added and displayed in the `QLabel` after pressing the button.
 
 To convert the `QString` into an integer, use the `QString::toInt( )` method:
 
@@ -288,7 +350,9 @@ int value = 15;
 QString text = QString::number(value);
 ```
 
-Information about which methods a given widget or object of a given class offers is easiest to obtain from the Qt documentation page, e.g.: http://doc.qt.io/qt-5/qlabel.html 
+---
+
+Information about which methods a given widget or object of a given class offers is easiest to obtain from the Qt documentation page, e.g.: [http://doc.qt.io/qt-5/qlabel.html](http://doc.qt.io/qt-5/qlabel.html). 
 
 ## Final assignments 🔥🛠
 
