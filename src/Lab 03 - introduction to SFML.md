@@ -8,9 +8,9 @@ Adding an external library requires modification of the project settings by indi
 
 ### Creating a project that uses SFML
 
-We will use the Qt Creator environment that is configured with the MSVC compiler from Visual C+++ 2017 for 64-bit architecture.
+We will use the Qt Creator environment that is configured with the GCC MinGW 7.3.0 for 64-bit architecture.
 
-Download the current version of the SFML library from its developers (https://www.sfml-dev.org/download/sfml/2.5.1/). Select a version that is suitable for your system, compiler, and architecture (*Visual C++ 15 (2017) - 64-bit*). Unpack it to the desired location on your disk. This manual assumes that the library directory is placed directly on the `C:` drive.
+Download the current version of the SFML library from its developers (https://www.sfml-dev.org/download/sfml/2.5.1/). Select a version that is suitable for your system, compiler, and architecture (*GCC 7.3.0 MinGW (SEH) - 64-bit*). Unpack it to the desired location on your disk. This manual assumes that the library directory is placed directly on the `C:` drive.
 
 Create an application project according to the [Qt Creator installation/Creating a new project](Qt%20Creator%20installation.html#creating-a-new-project) instruction. Place the `main.cpp` file with the content downloaded from the [sfml_hello.cpp](./_resources/sfml_hello.cpp) in the project.
 
