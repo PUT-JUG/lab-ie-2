@@ -127,7 +127,25 @@ In order for the animation of objects to be smooth and its speed independent of 
 * we can move objects from a separate thread at a fixed frequency;
 * we can assume a fixed frame rate - in this case, if the computer does not keep up with the calculations or display, the animation will slow down.
 
-In today's example we will use the first method. To measure the time we can use the class `sf::Clock`. It is a stopwatch clock that starts measuring time when an object is created. It allows you to read the elapsed time and restart measuring.
+In today's example we will use the first method. To measure the time we can use the class `sf::Clock`. It is a stopwatch clock that starts measuring time when an object is created. It allows you to read the elapsed time and restart measuring. See: [sf::Clock documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Clock.php).
+
+Basic working example using `sf::Clock` in game logic:
+
+```cpp
+sf::Clock clock;
+while (window.isOpen())
+{
+    sf::Time elapsed = clock.restart();
+
+    ...
+}
+```
+
+`sf::Clock::restart` method will zero the counter and return the `sf::Time` object representing time elapsed from the previous restart. See [sf::Time documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php). Following methods can be used to extract time in different formats:
+
+- [`sf::Time:asSeconds`](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php#aa3df2f992d0b0041b4eb02258d43f0e3),
+- [`sf::Time::asMiliseconds`](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php#aa16858ca030a07eb18958c321f256e5a),
+- [`sf::Time::asMicroseconds`](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php#a000c2c64b74658ebd228b9294a464275).
 
 ---
 
@@ -147,7 +165,9 @@ All "drawable" objects in the SFML library have a set of methods allowing for th
 
 Create two variables in the program that represent the speed of one of the objects - the horizontal (x) and vertical (y) components, e.g. `rectangle_velocity_x` and `rectangle_velocity_y`. They will denote the speed of the object in pixels per second. Give them values of 50 and 150 respectively.
 
-Use the time calculated in the previous task and in each loop run move one of the objects with the `move` method by the distance that should be covered in the measured time at the set speed.
+Use the time calculated in the previous task and in each loop run move rectangular object with the `sf::Transformable::move` method by the distance that should be covered in the measured time at the set speed. **HINT**:
+
+![distance](./_images/03/distance.svg)
 
 Then add the variable `rectangle_angular_velocity` describing the speed of rotation of the figure around its axis (in degrees per second) and give it a value of 10. Use the `rotate` method to cause the object to rotate.
 
@@ -159,19 +179,25 @@ Then add the variable `rectangle_angular_velocity` describing the speed of rotat
 
 Collision detection between objects on stage is the foundation of the mechanics of many games or applications that perform simple physics simulations. Since accurate collision calculations for many irregular objects would be very resource-intensive, some simplifications are used, such as approximating the shape of objects with a rectangle/circle (in a plane) or a cuboid (in 3D space).
 
-The objects we have drawn have the `getGlobalBounds()` method, which returns the `sf::FloatRect` rectangle which is the outline of the figure, in the coordinates of the window.
+The objects we have drawn have the `getGlobalBounds()` method, which returns the `sf::FloatRect` rectangle which is the outline of the figure, in the coordinates of the window. Usage example:
+
+```cpp
+sf::FloatRect rectangle_bounds = rectangle.getGlobalBounds();
+std::cout << rectangle_bounds.top << " " << rectangle_bounds.left << " " ;
+std::cout << rectangle_bounds.width << " " << rectangle_bounds.height << std::endl;
+```
 
 ---
 
 #### 🛠🔥 Assignment 🔥🛠
 
-Using the contour of a rotating rectangle, write a set of conditions to verify that it touches one of the edges of the screen. If so, "bounce" it by changing the *return* speed in the correct direction depending on the wall you are facing. You can assume that the bounce field has fixed dimensions.
+Using the contour of a rotating rectangle, write a set of conditions to verify that it touches one of the edges of the screen. If so, "bounce" it by changing the *return* speed in the correct direction depending on the wall the object is hitting. You can assume that window has fixed dimensions (or advanced check for current `window` size using `sf::RenderWindow::getSize` method).
 
 ---
 
 ## Colours
 
-Colours in SFML are described in *RGB* (*red*, *green*, *blue*). Each color component is an 8-bit number without a character (0-255 range). This is a very common way of representing color in computer graphics. It's sometimes called *RGB888* or *RGB 24-bit*.
+Colours in SFML are described in *RGB* (*red*, *green*, *blue*). Each color component is an 8-bit number without a character (0-255 range). This is a very common way of representing colour in computer graphics. It's sometimes called *RGB888* or *RGB 24-bit*.
 
 The basic figures in SFML have a contour and fill colour.
 
@@ -194,4 +220,4 @@ Add a change of colour of the rectangle to a random colour after each bounce, so
 ---
 
 ---
-Authors: *Jakub Tomczyński*, *Dominik Pieczyński*
+Authors: *Tomasz Mańkowski*, *Jakub Tomczyński*, *Dominik Pieczyński*
