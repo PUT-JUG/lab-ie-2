@@ -113,7 +113,7 @@ Inside the loop, a queue of events (keystrokes, mouse movement, etc.) is checked
 
 #### 🛠🔥 Assignment 🔥🛠
 
-Analyse how the sample code works. Change the size and layout of the elements on the scene, try to add more. What happens when you change the size of the window after starting the program? In what units are the sizes and position of objects on the scene expressed?
+Analyse how the sample code works. Change the size and layout of the elements on the scene, try to add more. What happens when you change the size of the window after starting the program? In what units are the sizes and position of objects on the scene expressed? 
 
 ---
 
