@@ -72,7 +72,9 @@ Try to compile the project. **The compiler** will return an error if the header 
 INCLUDEPATH += "C:/SFML-2.5.1/include"
 ```
 
-Enforce the processing of the `.pro file by right-clicking on the project name in the tree and selecting *Run qmake*.
+**ATTENTION**: All paths in `.pro` files should include a Linux-style slashes: `/` **NOT** `\` even though a Windows type system is used.
+
+Enforce the processing of the `.pro` file by right-clicking on the project name in the tree and selecting *Run qmake*.
 
 Try to compile the project again. This time, errors like *unresolved external symbol* will be returned by **linker** - the program "putting together" the final executable file from previously compiled fragments. This means that functions that were used in the program were found in the header files, but locating their compiled implementation failed - it is contained in the `*.lib` files provided with the library. Add additional linker parameters containing the path under which they can be found to the `*.pro` file, together with a list of files to be linked:
 
