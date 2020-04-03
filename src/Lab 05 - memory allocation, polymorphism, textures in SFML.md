@@ -1,12 +1,28 @@
 # Memory allocation, polymorphism, textures in SFML
 
+## Changing to C++17 standard
+
+From this classes we will be using some elements of *C++* standard that are available only in the newest version of the standard. In time of this script creation a *C++17* is the newest one, however *Qt Creator* creates all projects using *C++11* standard. In order to change the standard it is needed to edit, a `.pro` file and change:
+
+```qmake
+CONFIG += console c++11
+```
+
+, to:
+
+```qmake
+CONFIG += console c++17
+```
+
+, than right click on project name and choose ***Run qmake***. Do this after each new project creation!
+
 ## Pointers
 
 Variables that we have created through a simple variable declaration had their *life* limited to one *scope* - a fragment of code, most often separated by braces, e.g. the body of a function or the interior of a loop. These variables were created in the memory section called *stack*. Variables and such objects are automatically deleted when they leave the *scope* where they were allocated, e.g. when they leave a function. In most cases, this is desirable and relieves the programmer of the need for manual memory management.
 
 However, there are cases where it is advisable to separate the lifetime of an object from the scope in which it was created. For this purpose, we use the allocation on the *heap*.
 
-Historically, in order to allocate variables on the heap, the operator `new` was used. The variable created in this way had to be removed with the `delete` operator. Since dealocation operations are easy to forget, many programs still have a problem called **memory leaks**.
+Historically, in order to allocate variables on the heap, the operator `new` was used. The variable created in this way had to be removed with the `delete` operator. Since dealocation operations are easy to forget, many programs still have a problem called **memory leaks** - **THIS APPROACH IS NOT RECOMMENDED**.
 
 ---
 
@@ -39,7 +55,7 @@ Change the previous code so that instead of the `new` operator it will use the `
 
 After reading the description above and completing the task, you may get the impression that the allocation on the stack and the allocation on the heap using `std::unique_ptr` are functionally identical. In both cases, the object is destroyed after leaving the range in which it was declared. So why use `std::unique_ptr`?
 
-In C++11, in addition to the type `std::unique_ptr`, there is also a *move semantics* - the ability to "transfer" the object ownership to another scope or container. While in the case of objects declared on the stack, this transfer will copy at least some of the fields of the transferred object, in the case of `std::unique_ptr`, the transfer will not copy the object on the heap.
+In C++11/17, in addition to the type `std::unique_ptr`, there is also a *move semantics* - the ability to "transfer" the object ownership to another scope or container. While in the case of objects declared on the stack, this transfer will copy at least some of the fields of the transferred object, in the case of `std::unique_ptr`, the transfer will not copy the object on the heap.
 
 ---
 
@@ -67,9 +83,9 @@ Using pointers to the objects from the heap instead of objects on the stack allo
 
 ---
 
-#### 🛠🔥 Assignment 🔥🛠
+#### 🛠🔥 Assignment - Introduction 🔥🛠
 
-Using example classes from the previous instruction, try to compile the code below:
+Using example classes from the previous instruction, try to compile the code below. This short code shows, that a derived class object (`Car`), can be stored using a pointer to the base class (`Vehicle`). The object will not loose any additional information stored  or functionality provided by derived class, however access to this parts is different.
 
 ```cpp
 std::unique_ptr<Vehicle> skoda_superb_as_vehicle = std::make_unique<Car>(
@@ -79,7 +95,7 @@ std::cout << "Name: " << skoda_superb_as_vehicle->name() << std::endl;
 std::cout << "Has ABS: " << skoda_superb_as_vehicle->has_abs() << std::endl;
 ```
 
-Knowing that we treat our car as a `Vehicle` class object and analyzing the methods that are implemented in this class, consider why this program does not work. Remove the line causing the compilation error.
+Knowing that we treat our car as a `Vehicle` class object and analyzing the methods that are implemented in this class, consider why this program does not work. We will try to fix this in next assignment.
 
 Note the difference in a way we are accessing object fields (`->` instead of `.`). Why is that?
 
@@ -93,35 +109,53 @@ It is very important that **every base polymorphic class** contains a declaratio
 virtual ~ClassName() = default;
 ```
 
-In order to reinterpret the pointer to the base class as a pointer or a reference to a derived class, you should dereference the pointer ("pull" the object the pointer points to) and use a special `dynamic_cast` function.
+---
+
+#### 🛠🔥 Assignment - Introduction cont. 🔥🛠
+
+In **public** space of `Vehicle` class add virtual default destructor:
+
+```cpp
+virtual ~Vehicle() = default;
+```
+
+This however still does not solve our problem, we made a base class polymorphic, but the compiler still does not know we want to treat  `skoda_superb_as_vehicle` as a `Car` type object.
 
 ---
 
-#### 🛠🔥 Assignment 🔥🛠
+In order to reinterpret the base class pointer as a derived class pointer, you should dereference the pointer ("pull" the object the pointer points to) and use a special `dynamic_cast` function. A method `std::unique_ptr::get` can be used in order to get a standard pointer to the managed object. Than, `dynamic_cast` has to be used in order to cast the pointer to derived class pointer. E.g.:
 
-Add virtual destructor to the `Vehicle` class. Analyse and execute the code below:
+```cpp
+Car *car = dynamic_cast<Car *>(skoda_superb_as_vehicle.get());
+```
+
+---
+
+#### 🛠🔥 Assignment - Introduction cont. 🔥🛠
+
+Modify the code in that it is finally possible to access the `has_abs` method of `skoda_superb_as_vehicle` object.
+
+---
+
+The upside of using `dynamic_cast` in this case (instead of using `static_cast`) is that `dynamic_cast` will check if casting of the types is possible, if not will return a `nullptr`.
+
+---
+
+#### 🛠🔥 Assignment - Introduction cont. 🔥🛠
+
+Add a `Bike` class definition from the previous classes to your project and try the code below:
 
 ```cpp
 std::vector<std::unique_ptr<Vehicle>> vehicles;
 vehicles.emplace_back(std::make_unique<Car>("Skoda Superb", "Gasoline", 200, true));
 vehicles.emplace_back(std::make_unique<Bike>());
 
-for (int i = 0; i < vehicles.size(); i++) {
-    Car &some_car = dynamic_cast<Car &>(*vehicles[i]);
-}
-```
-
-What is the reason for the exception being thrown?
-
-We can solve that issue by catching the exception using `try...catch` or we can cast using pointers instead of references and check if the pointer is not empty:
-
-```cpp
-for (int i = 0; i < vehicles.size(); i++) {
-    Car *some_car = dynamic_cast<Car *>(vehicles[i].get());
+for (auto &v : vehicles) {
+    Car *some_car = dynamic_cast<Car *>(v.get());
     if (some_car != nullptr) { // cast successful
-        std::cout << i << ": abs=" << some_car->has_abs() << std::endl;
+        std::cout << v->name() << ": abs=" << some_car->has_abs() << std::endl;
     } else { // nope
-        std::cout << i << ": not a Car" << std::endl;
+        std::cout << v->name() << ": not a Car" << std::endl;
     }
 }
 ```
@@ -136,31 +170,41 @@ All "drawable" classes from the SFML library inherit the polymorphic class `sf::
 
 ---
 
-#### 🛠🔥 Assignment 🔥🛠
+#### 🛠🔥 Assignment - vector of `sf::Drawable` 🔥🛠
 
-Using the theory above, create a common vector for several objects of different shapes and colors in the SFML project.
+Modify an *entry code* from the first SFML classes to operate on `std::vector` vector of  `std::unique_ptr<sf::Drawable>`. Create a vector to store multiple object of different types shapes:
 
-In the main loop of the program, call the draw method on the `sf:Drawable` objects dereferenced from the pointer.
+```cpp
+std::vector<std::unique_ptr<sf::Drawable>> shapes;
+```
+
+Than create a function that will accept a reference to the vector and fill the collection with shapes inside the function. Remember to use `std::move` when emplacing objects to vector:
+
+```cpp
+void create_shapes(std::vector<std::unique_ptr<sf::Drawable>> &shapes_vec) {}
+```
+
+Now in the main loop of the program, you can draw all the objects stored in the vector independent on their specific type, as `sf::RenderWindow::draw` method accepts a reference to `sf::Drawable`:
+
+```cpp
+for(auto &s : shapes) {
+    window.draw(*s);
+}
+```
 
 ---
 
 ## Textures/sprites in SFML
 
-Texturing is the application of a flat, two-dimensional image to the geometric shapes in order to give the object a look closer to the real one.
-
-In the case of two-dimensional graphics, the term sprite is used - a flat bitmap that is rendered in whole or in part at a specific point on the screen.
+Texturing is the application of a flat, two-dimensional image to the geometric shapes in order to give the object a look closer to the real one. In the case of two-dimensional graphics, the term sprite is used - a flat bitmap that is rendered in whole or in part at a specific point on the screen.
 
 #### How to obtain textures?
 
-There are many websites with free multimedia resources such as textures, sprites and sounds - especially for non-commercial use. Databases usually have a well organised directory, which makes it easy to find the right resource.
-
-**Remember** - if you are using graphics downloaded from the Internet, check the license under which resources have been made available. Often, the authors expect only the so-called *attribution* - small mention in program information, where the resources come from and who created them.
+There are many websites with free multimedia resources such as textures, sprites and sounds - especially for non-commercial use. Databases usually have a well organised directory, which makes it easy to find the right resource. **Remember** - if you are using graphics downloaded from the Internet, check the license under which resources have been made available. Often, the authors expect only the so-called *attribution* - small mention in program information, where the resources come from and who created them.
 
 The links to a few textures that you can start with are: [grass](./_resources/grass.png), [wall](./_resources/wall.png), [guy](./_resources/guy.png).
 
-In SFML, *texture* is the image that is stored in memory, while *sprite* is the shape that will be displayed on the screen and that can be associated with the texture.
-
-An additional description of the sprites can be found [here](https://www.sfml-dev.org/tutorials/2.5/graphics-sprite.php)
+In SFML, *texture* is the image that is stored in memory, while *sprite* is the shape that will be displayed on the screen and that can be associated with the texture. An additional description of the sprites can be found [here](https://www.sfml-dev.org/tutorials/2.5/graphics-sprite.php)
 
 The simplest way to use texture is to load a bitmap from a file into the `sf::Texture` object, then create the `sf::Sprite` object and associate it with the loaded texture.
 
@@ -179,21 +223,45 @@ sprite.setTexture(texture);
 
 ---
 
-#### 🛠🔥 Assignment 🔥🛠
+#### 🛠🔥 Assignment - Textures 🔥🛠
 
-Load the supplied textures into the program.
-
-Create one sprite for each of them, display them on the screen in different places and with different scales.
+Load the supplied textures into the program. Create one sprite for each of them, display them on the screen in different places and with different scales (**HINT:** `sf::Transformable::setScale`).
 
 ---
 
-If we want the sprite to display only a fragment of the texture associated with it, we can use the `setTextureRect(sf::Rect)` method, which will allow us to point to the selected area. If we choose to display an area larger than the texture size and additionally set the texture to *Repeated* (method `sf::Texture::setRepeated(bool)`, we get *tiling*, i.e. the texture will be repeated to fill the whole area.
+If needed a sprite can display only a fragment of texture associated with it. In order to limit the texture area displayed `sf::Sprite::setTextureRect(sf::RectInt)` method can be used. E.g. in order to display only face of our guy we can do:
+
+```cpp
+sf::Texture texture_guy;
+if(!texture_guy.loadFromFile("guy.png")) { return 1; }
+
+sf::Sprite guy;
+guy.setTexture(texture_guy);
+guy.setTextureRect(sf::IntRect(10, 20, 20, 15)); //left, top, width, height
+```
+
+![head](./_images/05/head.png)
+
+It is also possible to make a texture cover a larger area. In order to do that we have to set a *Repeated* property of the texture by calling `sf::Texture::setRepeated(bool)` method resulting in *tilling* (the texture will be repeated to fill the area). Than a sprite rectangle has to be set to be larger in order for texture to fill the area. E..g.:
+
+```cpp
+sf::Texture texture_wall;
+if(!texture_wall.loadFromFile("wall.png")) { return 1; }
+texture_wall.setRepeated(true);
+
+sf::Sprite wall;
+wall.setTexture(texture_wall);
+wall.setScale(0.3, 0.3);
+wall.setTextureRect(sf::IntRect(0, 0, 500, 500));
+```
+
+![wall_repeated](./_images/05/wall_repeated.png)
 
 ---
 
-#### 🛠🔥 Assignment 🔥🛠
+#### 🛠🔥 Assignment - Textures cont. 🔥🛠
 
-Use tiling and *grass* texture to create a background in the program. Determine the appropriate `TextureRect` for the sprite representing the background so that it covers the entire window size.
+Use tiling and *grass* texture to create a background in the program. Determine the appropriate `TextureRect` for the sprite representing the background so that it covers the entire window size. **HINT:** Use `window.getSize().x` and `window.getSize().y` to get the windows size.
 
 ---
 
