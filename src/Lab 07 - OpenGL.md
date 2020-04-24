@@ -224,11 +224,11 @@ Remember that the order is important. Consider the following examples:
 
 * first the translation (shift) and then the rotation operation was performed:
 
-![Translation then rotation](./_images/lab_07_translation_rotation.png)
+![Translation then rotation](./_images/07/lab_07_translation_rotation.png)
 
 * in the second example, the same transformations were carried out, but in the reverse order, first the rotation and then the translation.
 
-![Rotation then translation](./_images/lab_07_rotation_translation.png)
+![Rotation then translation](./_images/07/lab_07_rotation_translation.png)
 
 As a result, performing the same operations (but in a different order) gives a different effect - compare the position and orientation of the airplane in both cases.
 
@@ -240,7 +240,7 @@ Note that for each `glPushMatrix()` call, one `glPopMatrix()` must be called. Th
 
 Consider the example shown in the figure below:
 
-![Rotation then translation](./_images/lab_07_push_pop.png)
+![Rotation then translation](./_images/07/lab_07_push_pop.png)
 
 We plan to draw two airplanes - in point *(4, 4)* and then *(2, 1)*. Without using the `glPushMatrix()` / `glPopMatrix()` functions (operations shown above the image) it is necessary to calculate how to move from *(4, 4)* to *(2, 1)*. In this example this seems easy, but there may be more transformations, including rotations that complicate the task.
 Using the `glPushMatrix()` / `glPushMatrix()` functions (operations shown below the image), the task is less complicated - no reverse transformations are required - it is enough to remember the current state first and then return to it.
@@ -273,6 +273,9 @@ Write a program showing the motion of planets in the Solar System.
 
 Write a `CelestialBody` class representing the celestial body - to see the rotational motion of planets better, you can represent them as cubes.
 
+
+![planetarium](./_images/07/planetarium.gif)
+
 Features of the celestial body:
 
 * a diameter
@@ -281,7 +284,7 @@ Features of the celestial body:
 * a period of circular motion
 * a color of the surface
 
-The class should have a `step(float time)` method (similar to the programs from previous classes) and a `draw()` method that causes the drawing of the planet.
+The class should have a `animate(float time)` method (similar to the programs from previous classes) and a `draw()` method that causes the drawing of the planet.
 
 Think about the order of the transformations needed to draw the planet in the right place and with the right rotation angle (hint: you don't need trigonometry!).
 
