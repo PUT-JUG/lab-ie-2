@@ -39,6 +39,7 @@ public:
     Rational add(const Rational &other) const; // adds second rational number, returns result
     Rational subtract(const Rational &other) const; // subtracts second rational number, returns result
     void print() const; // prints number to console
+
 private:
     int num_, den_;
 };
@@ -51,7 +52,7 @@ Rational::Rational(int num, int den) : num_(num) { // initializes num_ field wit
     if (den) {
         den_ = den;
     } else {
-        den = 1;
+        den_ = 1;
     }
 }
 
