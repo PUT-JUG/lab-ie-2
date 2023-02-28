@@ -31,9 +31,9 @@ def compile_markdown(working_directory: Path = Path(os.getcwd())):
         output_file_name = f'{title}.html'
         subprocess.run(['pandoc', str(document_path), '--from=gfm', '--to=html', '--standalone',
                         f'--metadata=title:{title}', f'--resource-path={output_dir}',
-                        f'--include-in-header=_head.html',
-                        f'--include-before-body=_header.html',
-                        f'--include-after-body=_footer.html',
+                        f'--include-in-header=_pandoc_head.html',
+                        f'--include-before-body=_pandoc_header.html',
+                        f'--include-after-body=_pandoc_footer.html',
                         '--css=_static/github-markdown.css', '--css=_static/custom.css',
                         f'--output={output_dir / output_file_name}'], shell=True)
 
