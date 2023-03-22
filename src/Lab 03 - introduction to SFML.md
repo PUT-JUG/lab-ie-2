@@ -68,7 +68,7 @@ int main() {
 
 Try to compile the project. **The compiler** will return an error if the header file `SFML/Window.h` is missing from the system paths it searches. 
 
-## Adding SFML to qmake
+## Adding SFML to qmake (Windows)
 Add the missing path to the project settings by modifying the `.pro` file describing the project:
 
 ```plaintext
@@ -97,7 +97,19 @@ This is due to the fact that the libraries we have included in the project are n
 Copy the `.dll` files from the `bin` directory of the SFML library to the directory where the executable file (`exe`) of your application is located. In the Qt Creator environment, the default compilation directory is located next to the project directory and is named *build-<project_name>-<kit_name>-<build_type>*, e.g., *build-<project_name>-<release_name>*. For example, *build-sfml_hello-Desktop_Qt_5_10_1_MSVC2017_64bit-Debug*. Start the project. A properly working program should display the following window:
 
 ![](./_images/sfml_hello.png)
-## Adding SFML to CMake
+
+## Adding SFML to qmake (Linux)
+Open a terminal by holding ctl+alt+t
+Install SFML library using command below
+```
+sudo apt-get install libsfml-dev
+```
+To link the SFML library to the project, add below lines to `*.pro` file of the proejct
+```
+INCLUDEPATH += /usr/include/SFML
+LIBS += -lsfml-window -lsfml-system -lsfml-graphics -lsfml-audio -lsfml-network
+```
+## Adding SFML to CMake (Linux)
 Open a terminal by holding ctl+alt+t
 Install SFML library using command below
 ```
