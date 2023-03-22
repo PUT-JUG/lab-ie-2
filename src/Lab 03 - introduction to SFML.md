@@ -66,7 +66,10 @@ int main() {
 }
 ```
 
-Try to compile the project. **The compiler** will return an error if the header file `SFML/Window.h` is missing from the system paths it searches. Add the missing path to the project settings by modifying the `.pro` file describing the project:
+Try to compile the project. **The compiler** will return an error if the header file `SFML/Window.h` is missing from the system paths it searches. 
+
+## Adding SFML to qmake
+Add the missing path to the project settings by modifying the `.pro` file describing the project:
 
 ```plaintext
 INCLUDEPATH += "C:/SFML-2.5.1/include"
@@ -94,7 +97,22 @@ This is due to the fact that the libraries we have included in the project are n
 Copy the `.dll` files from the `bin` directory of the SFML library to the directory where the executable file (`exe`) of your application is located. In the Qt Creator environment, the default compilation directory is located next to the project directory and is named *build-<project_name>-<kit_name>-<build_type>*, e.g., *build-<project_name>-<release_name>*. For example, *build-sfml_hello-Desktop_Qt_5_10_1_MSVC2017_64bit-Debug*. Start the project. A properly working program should display the following window:
 
 ![](./_images/sfml_hello.png)
+## Adding SFML to CMake
+Open a terminal by holding ctl+alt+t
+Install SFML library using command below
+```
+sudo apt-get install libsfml-dev
+```
+then open `CMakeLists.txt` in your project and add the below line befor ``` add_executable```
+```
+find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
+```
+and line below after ``` add_executable```
+```
+target_link_libraries(<Project-Name> sfml-graphics sfml-audio sfml-system sfml-network )
 
+```
+Don't forget to change ```<Project-Name>``` to the name of your project
 ## SFML library
 
 SFML is a multi-platform library that facilitates the creation of programs that use two-dimensional graphics, e.g. simple games. It contains modules that allow you to generate graphics - drawing simple geometric figures with textures, keyboard/mouse input, sound and network operation.
