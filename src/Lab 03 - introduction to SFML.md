@@ -175,7 +175,7 @@ while (window.isOpen())
 
 `sf::Clock::restart` method will zero the counter and return the `sf::Time` object representing time elapsed from the previous restart. See [sf::Time documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php). Following methods can be used to extract time in different formats:
 
-- [`sf::Time:asSeconds`](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php#aa3df2f992d0b0041b4eb02258d43f0e3),
+- [`sf::Time::asSeconds`](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php#aa3df2f992d0b0041b4eb02258d43f0e3),
 - [`sf::Time::asMiliseconds`](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php#aa16858ca030a07eb18958c321f256e5a),
 - [`sf::Time::asMicroseconds`](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php#a000c2c64b74658ebd228b9294a464275).
 
