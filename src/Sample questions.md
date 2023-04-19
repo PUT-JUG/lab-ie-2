@@ -148,3 +148,5 @@ int main() {
     SavingsAccount janeS
 ```
 
+***
+Authors: *Kamil Młodzikowski*, *Iman Esfandiyar*
