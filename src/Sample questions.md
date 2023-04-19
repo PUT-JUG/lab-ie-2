@@ -133,7 +133,9 @@ public:
     }
 };
 
-int main() {
+int main() 
+
+{
     Bank bank;
 
     // Create some clients and accounts
@@ -146,6 +148,7 @@ int main() {
 
     Client jane("Jane Doe");
     SavingsAccount janeS
+}
 ```
 
 ***
