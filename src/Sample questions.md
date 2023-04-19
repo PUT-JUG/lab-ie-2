@@ -135,19 +135,36 @@ public:
 
 int main() 
 
-{
+int main() {
+    // Create accounts
+    Account account1("A10001", 5000);
+    SavingsAccount account2("S10001", 10000, 2.5);
+    CheckingAccount account3("C10001", 2000);
+
+    // Deposit and withdraw from accounts
+    account1.deposit(1000);
+    account1.withdraw(2000);
+    account2.deposit(500);
+    account2.addInterest();
+    account3.withdraw(500);
+
+    // Create clients and add accounts to them
+    Client client1("John Doe");
+    client1.addAccount(&account1);
+    client1.addAccount(&account2);
+
+    Client client2("Jane Smith");
+    client2.addAccount(&account3);
+
+    // Create bank and add clients to it
     Bank bank;
+    bank.addClient(&client1);
+    bank.addClient(&client2);
 
-    // Create some clients and accounts
-    Client john("John Smith");
-    CheckingAccount johnChecking("123456", 1000.0);
-    SavingsAccount johnSavings("654321", 5000.0, 2.5);
-    john.addAccount(&johnChecking);
-    john.addAccount(&johnSavings);
-    bank.addClient(&john);
+    // Print bank clients and their accounts
+    bank.printClients();
 
-    Client jane("Jane Doe");
-    SavingsAccount janeS
+    return 0;
 }
 ```
 
