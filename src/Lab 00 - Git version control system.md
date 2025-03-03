@@ -130,6 +130,135 @@ It is also useful to remove local repositories from your computer's hard drive a
 
 You can also delete a repository created during the lab to avoid cluttering your GitHub profile (*Settings* &rarr; *Options* &rarr; *Danger Zone* &rarr; *Delete this repository*).
 
+## Git using command line (Ubuntu)
+It is both possible and recommended to use Git via the command line. This section explains the commands for creating a repository on a local machine, adding files, tracking changes, and pushing those changes to the server. Please note that most of the commands should work on Windows; however, they have not been tested. You can search the internet for the equivalent commands for Windows.
+
+### Create a local project
+
+Use the `mkdir` command to create a new directory for your project with the preferred name and navigate to the newly created folder using `cd`:
+
+```bash
+mkdir my_project
+cd my_project
+```
+To validate the existence of the my_project folder, navigate to the directory where the project was created using Files. 
+
+At this stage, you can add files to your project using three methods: 
+
+1. By using the `echo` command to directly write text into a new file, as shown below:
+```bash
+echo "Some cool c++ code" > cool.txt
+```
+To validate the existence of the `cool.txt` file, navigate to the directory where the project was created using Files.
+
+2. by using the `touch` command to create a file in the working directory,as shown below:
+```bash
+touch way_cooler.txt
+```
+To validate the existence of the `way_cooler.txt` file, navigate to the directory where the project was created using Files.
+
+To open editor in terminal we can use nano using the command below:
+```bash
+nano way_cooler.txt
+```
+Start typing your sample text. To save the file, press `Ctrl+O` and then Enter. To exit, press `Ctrl+X`.
+To validate the existence of the text in `way_cooler.txt`, navigate to the directory where the project was created using the file manager, and double-click on the file. You should see the text you entered through the terminal.
+
+3. By copying file to your working directory from other places.
+
+### Setup local Git (version control)
+
+make sure Git is installed using 
+```bash
+git --version
+```
+in case git was not found can be installed using the commands below:
+```bash
+sudo apt update
+sudo apt install git
+```
+To initialize Git in your working directory, ensure that you are located in the project directory `my_project` in the terminal and use the below comamnd.
+```bash
+git init
+```
+In order to track changes to your files in Git, those files must be added to Git (once). Files can be added one by one or all files at once, to add a single file to git use:
+
+```bash
+git add way_cooler.txt
+```
+and to add all the files in your working directory to git execute:
+```bash
+git add .
+```
+Next, we need to commit the changes to the Git history using the command below. Please note that the `-m` parameter is necessary to create a record of what has been changed or modified since the previous commit of the working code. For instance, our first commit will be called `Initial commit`. In subsequent commits, we use descriptive phrases such as `Some function` added or `Readme file uploaded`, etc.
+
+```bash
+git commit -m "Initial commit"
+```
+It is possible to check the state and commit histroy of the local git  using the command below:
+
+```bash
+git status
+git log
+```
+### Connect to Remote Repository (GitHub, GitLab, etc.)
+Open GitHub in your browser and create a new repository with the name of your project, `my_project`. If you don’t have a GitHub account, this is the perfect time to create one.
+
+After creating the repository, validate the existence of the remote repository by visiting the link below.
+
+https://github.com/your-username/my_project.git
+
+Please remember to replace `your-username` with your actual GitHub username.
+
+To connect the remote repository to your local project, use the command below in the terminal while in your project directory:
+
+```bash
+git remote add origin https://github.com/your-username/my_project.git
+```
+Verify the remote connection using the command below:
+```bash
+git remote -v
+```
+In Git, multiple copies of your project can exist thanks to branches. Each branch can maintain its own version of the project, allowing for different development paths and parallel feature development.
+
+Check the current project branch
+```bash
+git branch --show-current
+```
+Rename branch to main (if not already)
+```bash
+git branch -M main
+```
+Now it's time to push our commits to the remote server, 
+```bash
+git push -u origin main
+```
+To validate, open the repository in your browser and check if your local files are present in your GitHub repository. In the future, to sync our local changes with GitHub, we need to use the commit and push commands consecutively.
+
+### Changing branches
+To create a new branch execute 
+```bash
+git checkout -b new-feature
+```
+Switch back to main branch
+```bash
+git checkout main
+```
+Merge the branches
+
+```bash
+git merge new-feature
+```
+
+Delete the temporary branch
+```bash
+git branch -d new-feature
+```
+#### 🛠🔥 Assignment CLI 🔥🛠
+
+Create a C++ project using Qt Creator, navigate to the project directory where the project files are located, initialize Git, add the files to Git, and commit the changes. Next, create a GitHub repository with the same name as your project and connect your GitHub repository to the Qt project. Use the command line to create a new branch called `development`, switch to the `development` branch, and create a README.md file if it doesn't already exist. Add some text to the project README.md in Qt Creator, then use the command line to commit and push the changes to your GitHub repository. Finally, merge the development branch into the `main` branch so that your changes are included in the `main` branch. Validate the existence of both branches using the "Branches" tab on GitHub, and check the commit history to ensure everything is recorded correctly.
+ 
+
 ## Final assignments 🔥🛠
 
 * Read the tutorial to the GitHub: https://guides.github.com/. Read and understand topics up to and including *Be Social*.
