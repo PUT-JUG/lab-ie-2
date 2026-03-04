@@ -18,7 +18,7 @@ If you are working on the PC in the lab, you can skip this step. Otherwise, you 
 Launch VS Code and install following extensions. You can do this by clicking on the Extensions icon on the left sidebar (`Ctrl+Shift+X`) and searching for the extension name or ID:
 - C/C++ (by Microsoft) - `ms-vscode.cpptools`
 
-![C/C++ extension](https://code.visualstudio.com/assets/docs/languages/cpp/cpp-extension.png)
+![C/C++ extension](_images/cpp-extension.png)
 
 ## Create a new C++ project
 
@@ -28,7 +28,7 @@ You can create a new C++ project by following these steps:
 2. Open the folder in VS Code (`File > Open Folder`).
 3. Create a new file named `main.cpp` and add the following code:
 
-![New file](https://code.visualstudio.com/assets/docs/cpp/msvc/new-file-button.png)
+![New file](_images/new-file-button.png)
 
 ```cpp
 #include <iostream>
@@ -41,16 +41,16 @@ int main() {
 
 4. Save the file (`Ctrl+S`). Notice that your files are listed in the File Explorer view (`Ctrl+Shift+E`) in the side bar of VS Code:
 
-![File Explorer](https://code.visualstudio.com/assets/docs/cpp/msvc/file-explorer.png)
+![File Explorer](_images/file-explorer.png)
 
 ## Build and run the project
 
 1. Open `main.cpp` in the editor so that it is the active file.
 2. Press the play button in the top right corner of the editor (`Run and Debug`), or press `F5` to start debugging. If this is your first time running the project, you will be prompted to select a debug configuration. Choose `C++ (GDB/LLDB)`.
 
-![Run and Debug](https://code.visualstudio.com/assets/docs/cpp/playbutton/run-play-button.png)
+![Run and Debug](_images/run-play-button.png)
 
-![G++](https://code.visualstudio.com/assets/docs/cpp/wsl/build-and-debug-active-file.png)
+![G++](_images/build-and-debug-active-file.png)
 
 3. After the build is complete, you should see the output "Hello, World!" in the integrated *Terminal* at the bottom of the VS Code window. Make sure to check the *Terminal* tab if you don't see the output immediately.
 
@@ -98,11 +98,11 @@ The first time you run your program, the C++ extension creates tasks.json, which
 1. Go back to helloworld.cpp so that it is the active file.
 2. Set a breakpoint by clicking on the editor margin or using F9 on the current line.
 
-![Set Breakpoint](https://code.visualstudio.com/assets/docs/cpp/playbutton/cpp-breakpoint.png)
+![Set Breakpoint](_images/cpp-breakpoint.png)
 
 3. From the drop-down next to the play button, select Debug C/C++ File.
 
-![Debug](https://code.visualstudio.com/assets/docs/cpp/playbutton/debug-cpp-file-play-button.png)
+![Debug](_images/debug-cpp-file-play-button.png)
 
 The play button has two modes: Run C/C++ File and Debug C/C++ File. It will default to the last-used mode. If you see the debug icon in the play button, you can just select the play button to debug, instead of selecting the drop-down menu item.
 
@@ -227,3 +227,6 @@ After installing SFML, you can include it in your project by adding the followin
 
 The important part here is the addition of the `-lsfml-graphics`, `-lsfml-window`, and `-lsfml-system` flags, which tell the compiler to link against the SFML libraries. After making these changes, you should be able to use SFML in your project without any issues.
 
+---
+
+Instructions adapted from the [official documentation](https://code.visualstudio.com/docs/cpp/config-linux) and the [SFML tutorial](https://www.sfml-dev.org/tutorials/2.5/start-linux.php).
