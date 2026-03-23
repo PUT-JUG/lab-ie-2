@@ -79,7 +79,7 @@ and on apple silicon in,
 /opt/homebrew/opt/sfml
 ```
 
-After installation we have to modify `task.json`. We have to add information about c++ standard `-std=c++17`, we have to include and link libraries `-I<installation_path>/include`, `-L<installation_path>/lib`, `-lsfml-graphics`, `-lsfml-window`, `-lsfml-system`. So the modified file should look similarly to this:
+After installation we have to modify `task.json`. We have to add information about c++ standard `-std=c++17` and include and link libraries `-I<installation_path>/include`, `-L<installation_path>/lib`, `-lsfml-graphics`, `-lsfml-window`, `-lsfml-system`. So the modified file should look similarly to this:
 
 ```json
 {
@@ -119,7 +119,7 @@ After installation we have to modify `task.json`. We have to add information abo
 }
 ```
 
-It is not necessary but recommended to add `c_cpp_properties.json` in `.vscode` folder. This files tels IntelliSense where to search for libraries and makes autocompleation work. In this new file paste:
+It is not necessary but recommended to add `c_cpp_properties.json` in `.vscode` folder. This files tells IntelliSense where to search for libraries and makes autocompleation work. In this new file paste:
 
 ```json
 {
@@ -140,6 +140,7 @@ It is not necessary but recommended to add `c_cpp_properties.json` in `.vscode` 
     "version": 4
 }
 ```
+Now you can try and compile the code.
 
 ## Final result
 
@@ -152,10 +153,10 @@ After succesfull compilaiton you should see the rendered image as follows.
 SFML is a multi-platform library that facilitates the creation of programs that use two-dimensional graphics, e.g. simple games. It contains modules that allow you to generate graphics - drawing simple geometric figures with textures, keyboard/mouse input, sound and network operation.
 
 The library API documentation can be found at the following address:
-https://www.sfml-dev.org/documentation/2.5.1/
+https://www.sfml-dev.org/documentation/3.0.2/
 
 Tutorials describing the basic functionality are available below:
-https://www.sfml-dev.org/tutorials/2.5/
+https://www.sfml-dev.org/tutorials/3.0/
 
 All library resources are located in the namespace `sf`. To avoid cluttering the main namespace, we will stop using the `using namespace ...` directives, and instead precede the corresponding names with `sf::`, `std::`, and so on.
 
@@ -181,7 +182,7 @@ In order for the animation of objects to be smooth and its speed independent of 
 * we can move objects from a separate thread at a fixed frequency;
 * we can assume a fixed frame rate - in this case, if the computer does not keep up with the calculations or display, the animation will slow down.
 
-In today's example we will use the first method. To measure the time we can use the class `sf::Clock`. It is a stopwatch clock that starts measuring time when an object is created. It allows you to read the elapsed time and restart measuring. See: [sf::Clock documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Clock.php).
+In today's example we will use the first method. To measure the time we can use the class `sf::Clock`. It is a stopwatch clock that starts measuring time when an object is created. It allows you to read the elapsed time and restart measuring. See: [sf::Clock documentation](https://www.sfml-dev.org/documentation/3.0.2/classsf_1_1Clock.php).
 
 Basic working example using `sf::Clock` in game logic:
 
@@ -195,11 +196,11 @@ while (window.isOpen())
 }
 ```
 
-`sf::Clock::restart` method will zero the counter and return the `sf::Time` object representing time elapsed from the previous restart. See [sf::Time documentation](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php). Following methods can be used to extract time in different formats:
+`sf::Clock::restart` method will zero the counter and return the `sf::Time` object representing time elapsed from the previous restart. See [sf::Time documentation](https://www.sfml-dev.org/documentation/3.0.2/classsf_1_1Time.html). Following methods can be used to extract time in different formats:
 
-- [`sf::Time::asSeconds`](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php#aa3df2f992d0b0041b4eb02258d43f0e3),
-- [`sf::Time::asMiliseconds`](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php#aa16858ca030a07eb18958c321f256e5a),
-- [`sf::Time::asMicroseconds`](https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Time.php#a000c2c64b74658ebd228b9294a464275).
+- [`sf::Time::asSeconds`](https://www.sfml-dev.org/documentation/3.0.2/classsf_1_1Time.html#a0284a68194143e17451b9fd2c9292518),
+- [`sf::Time::asMiliseconds`](https://www.sfml-dev.org/documentation/3.0.2/classsf_1_1Time.html#a94ca72624d95cf0c2fef2ed52c4a42f8),
+- [`sf::Time::asMicroseconds`](https://www.sfml-dev.org/documentation/3.0.2/classsf_1_1Time.html#a7617b1387d7b3a6f8c7019155aa25ccc).
 
 ---
 
@@ -211,7 +212,7 @@ Refer to the documentation for `sf::Clock` class. Add the `sf::Clock` object to 
 
 ## Moving an object
 
-All "drawable" objects in the SFML library have a set of methods allowing for their manipulation (transformations) on the screen plane - moving, scaling, rotating. The method to move *in relation to the current position* is `move(float offsetX, float offsetY)`.
+All "drawable" objects in the SFML library have a set of methods allowing for their manipulation (transformations) on the screen plane - moving, scaling, rotating. The method to move *in relation to the current position* is `move(sf::Vector2f(float offsetX, float offsetY))`.
 
 ---
 
@@ -223,9 +224,7 @@ Use the time calculated in the previous task and in each loop run move rectangul
 
 ![distance](./_images/03/distance.svg)
 
-Then add the variable `rectangle_angular_velocity` describing the speed of rotation of the figure around its axis (in degrees per second) and give it a value of 10. Use the `rotate` method to cause the object to rotate.
-
-**Note:** Unlike trigonometric functions in a standard library, functions in SFML operate at angles expressed in degrees.
+Then add the variable `rectangle_angular_velocity` describing the speed of rotation of the figure around its axis (in degrees per second) and give it a value of 10. Use the `rotate(sf::degrees(float degrees))` method to cause the object to rotate.
 
 ---
 
@@ -237,8 +236,8 @@ The objects we have drawn have the `getGlobalBounds()` method, which returns the
 
 ```cpp
 sf::FloatRect rectangle_bounds = rectangle.getGlobalBounds();
-std::cout << rectangle_bounds.top << " " << rectangle_bounds.left << " " ;
-std::cout << rectangle_bounds.width << " " << rectangle_bounds.height << std::endl;
+std::cout << "Top left corner coordinates are: " << rectangle_bounds.position.x << " " << rectangle_bounds.position.y << " " ;
+std::cout << "Size od the rectangle is: " << rectangle_bounds.size.x << " " << rectangle_bounds.size.y << std::endl;
 ```
 
 ---
