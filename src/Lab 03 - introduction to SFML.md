@@ -8,10 +8,6 @@ Adding an external library requires modification of the project settings by indi
 
 ### Creating a project that uses SFML
 
-We will use the Qt Creator environment that is configured with the GCC MinGW 7.3.0 for 64-bit architecture.
-
-Download the current version of the SFML library from its developers (https://www.sfml-dev.org/download/sfml/2.5.1/). Select a version that is suitable for your system, compiler, and architecture (*GCC 7.3.0 MinGW (SEH) - 64-bit*). Unpack it to the desired location on your disk. This manual assumes that the library directory is placed directly on the `C:` drive.
-
 Create a plain C++ application project. Place the content into `main.cpp` file with:
 
 ```cpp
@@ -19,46 +15,37 @@ Create a plain C++ application project. Place the content into `main.cpp` file w
 #include <SFML/Graphics.hpp>
 
 int main() {
-    // create the window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+    sf::RenderWindow window(sf::VideoMode(sf::Vector2u(800, 600)), "My window");
 
-    // create some shapes
-    sf::CircleShape circle(100.0);
-    circle.setPosition(100.0, 300.0);
+    sf::CircleShape circle(100.0f);
+    circle.setPosition(sf::Vector2f(100.0f, 300.0f));
     circle.setFillColor(sf::Color(100, 250, 50));
 
-    sf::RectangleShape rectangle(sf::Vector2f(120.0, 60.0));
-    rectangle.setPosition(500.0, 400.0);
+    sf::RectangleShape rectangle(sf::Vector2f(120.0f, 60.0f));
+    rectangle.setPosition(sf::Vector2f(500.0f, 400.0f));
     rectangle.setFillColor(sf::Color(100, 50, 250));
 
     sf::ConvexShape triangle;
     triangle.setPointCount(3);
-    triangle.setPoint(0, sf::Vector2f(0.0, 0.0));
-    triangle.setPoint(1, sf::Vector2f(0.0, 100.0));
-    triangle.setPoint(2, sf::Vector2f(140.0, 40.0));
+    triangle.setPoint(0, sf::Vector2f(0.0f, 0.0f));
+    triangle.setPoint(1, sf::Vector2f(0.0f, 100.0f));
+    triangle.setPoint(2, sf::Vector2f(140.0f, 40.0f));
     triangle.setOutlineColor(sf::Color::Red);
     triangle.setOutlineThickness(5);
-    triangle.setPosition(600.0, 100.0);
+    triangle.setPosition(sf::Vector2f(600.0f, 100.0f));
 
-    // run the program as long as the window is open
     while (window.isOpen()) {
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
+        while (auto event = window.pollEvent()) {
+            if (event->is<sf::Event::Closed>())
                 window.close();
         }
 
-        // clear the window with black color
         window.clear(sf::Color::Black);
 
-        // draw everything here...
         window.draw(circle);
         window.draw(rectangle);
         window.draw(triangle);
 
-        // end the current frame
         window.display();
     }
 
@@ -68,63 +55,98 @@ int main() {
 
 Try to compile the project. **The compiler** will return an error if the header file `SFML/Window.h` is missing from the system paths it searches. 
 
-## Adding SFML to qmake (Windows)
-Add the missing path to the project settings by modifying the `.pro` file describing the project:
+## Adding SFML (Windows)
 
-```plaintext
-INCLUDEPATH += "C:/SFML-2.5.1/include"
+Download and install the latest stable version from https://www.sfml-dev.org/download/.
+
+
+## Adding SFML (Linux)
+
+## Adding SFML (MacOS)
+
+First install sfml.
+
+```bash
+brew install sfml
 ```
 
-**ATTENTION**: All paths in `.pro` files should include a Linux-style slashes: `/` **NOT** `\` even though a Windows type system is used.
+On apple intel it is installed in,
+```bash
+/usr/local/opt/sfml
+```
+and on apple silicon in,
+```bash
+/opt/homebrew/opt/sfml
+```
 
-Enforce the processing of the `.pro` file by right-clicking on the project name in the tree and selecting *Run qmake*.
+After installation we have to modify `task.json`. We have to add information about c++ standard `-std=c++17`, we have to include and link libraries `-I<installation_path>/include`, `-L<installation_path>/lib`, `-lsfml-graphics`, `-lsfml-window`, `-lsfml-system`. So the modified file should look similarly to this:
 
-Try to compile the project again. This time, errors like *unresolved external symbol* will be returned by **linker** - the program "putting together" the final executable file from previously compiled fragments. This means that functions that were used in the program were found in the header files, but locating their compiled implementation failed - it is contained in the `*.lib` files provided with the library. Add additional linker parameters containing the path under which they can be found to the `*.pro` file, together with a list of files to be linked:
-
-```plaintext
-LIBS += -L"C:/SFML-2.5.1/lib"
-CONFIG(debug, debug|release){
-    LIBS += -lsfml-audio-d -lsfml-graphics-d -lsfml-network-d -lsfml-system-d -lsfml-window-d
-} else {
-    LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window
+```json
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: clang build active file",
+            "command": "/usr/bin/clang++",
+            "args": [
+                "-fcolor-diagnostics",
+                "-fansi-escape-codes",
+                "-std=c++17",
+                "-g",
+                "${workspaceFolder}/*.cpp",
+                "-I/opt/homebrew/opt/sfml/include",
+                "-L/opt/homebrew/opt/sfml/lib",
+                "-lsfml-graphics",
+                "-lsfml-window",
+                "-lsfml-system",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Task generated by Debugger."
+        }
+    ],
+    "version": "2.0.0"
 }
 ```
 
-Restart *qmake*, then compile the project. The compilation should run without errors, but you will still not be able to run the program.
+It is not necessary but recommended to add `c_cpp_properties.json` in `.vscode` folder. This files tels IntelliSense where to search for libraries and makes autocompleation work. In this new file paste:
 
-This is due to the fact that the libraries we have included in the project are not compiled into the executable file - they are dynamically linked (*DLL - Dynamic-Link Library*) and loaded from external files during startup. Thanks to this, they can be shared between many programs, which, in turn, are smaller in size. DLL files can be placed in system directories or in the directory where the executable file of the program is located (preferred way).
+```json
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/opt/homebrew/opt/sfml/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang++",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "macos-clang-arm64"
+        }
+    ],
+    "version": 4
+}
+```
 
-Copy the `.dll` files from the `bin` directory of the SFML library to the directory where the executable file (`exe`) of your application is located. In the Qt Creator environment, the default compilation directory is located next to the project directory and is named *build-<project_name>-<kit_name>-<build_type>*, e.g., *build-<project_name>-<release_name>*. For example, *build-sfml_hello-Desktop_Qt_5_10_1_MSVC2017_64bit-Debug*. Start the project. A properly working program should display the following window:
+## Final result
+
+After succesfull compilaiton you should see the rendered image as follows.
 
 ![](./_images/sfml_hello.png)
 
-## Adding SFML to qmake (Linux)
-Open a terminal by holding ctl+alt+t
-Install SFML library using command below
-```
-sudo apt-get install libsfml-dev
-```
-To link the SFML library to the project, add below lines to `*.pro` file of the proejct
-```
-INCLUDEPATH += /usr/include/SFML
-LIBS += -lsfml-window -lsfml-system -lsfml-graphics -lsfml-audio -lsfml-network
-```
-## Adding SFML to CMake (Linux)
-Open a terminal by holding ctl+alt+t
-Install SFML library using command below
-```
-sudo apt-get install libsfml-dev
-```
-then open `CMakeLists.txt` in your project and add the below line befor ``` add_executable```
-```
-find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
-```
-and line below after ``` add_executable```
-```
-target_link_libraries(<Project-Name> sfml-graphics sfml-audio sfml-system sfml-network )
-
-```
-Don't forget to change ```<Project-Name>``` to the name of your project
 ## SFML library
 
 SFML is a multi-platform library that facilitates the creation of programs that use two-dimensional graphics, e.g. simple games. It contains modules that allow you to generate graphics - drawing simple geometric figures with textures, keyboard/mouse input, sound and network operation.
