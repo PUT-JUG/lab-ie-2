@@ -246,7 +246,6 @@ while (auto event = window.pollEvent())
 Example for handling events can be found below. A event queue is used to handle all the events occurred during a current program/window loop. A `sf::Window::pollEvent` method is used to dequeue subsequent events, then a type of event can be check end handled properly. This procedure can be used for detecting single events like a press or release of key or mouse button. For example the event will not reoccur when the mouse button is hold. This can be used for situation, where clicking something needs to evoke an action only once:
 
 ```cpp
-sf::Event event;
 while (auto event = window.pollEvent()) {
     // "close requested" event: we close the window
     if (event->is<sf::Event::Closed>()) 
