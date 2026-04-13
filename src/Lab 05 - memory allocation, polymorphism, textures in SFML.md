@@ -2,19 +2,19 @@
 
 ## Changing to C++17 standard
 
-From this classes we will be using some elements of *C++* standard that are available only in the newest version of the standard. In time of this script creation a *C++17* is the newest one, however *Qt Creator* creates all projects using *C++11* standard. In order to change the standard it is needed to edit, a `.pro` file and change:
+From this classes we will be using some elements of *C++* standard that are available only in the newest version of the standard. In time of this script creation a *C++17* is the newest one, however *VSCode* creates all projects using *C++11* standard. In order to change the standard it is needed to edit, a `tasks.json` file and change:
 
-```qmake
-CONFIG += console c++11
+```json
+"args": [
+    "-fcolor-diagnostics",
+    "-fansi-escape-codes",
+    "-std=c++17", <---- Add this!
+    "-g",
+    "${workspaceFolder}/*.cpp",
+    "-o",
+    "${fileDirname}/${fileBasenameNoExtension}"
+],
 ```
-
-, to:
-
-```qmake
-CONFIG += console c++17
-```
-
-, than right click on project name and choose ***Run qmake***. Do this after each new project creation!
 
 ## Pointers
 
@@ -204,7 +204,7 @@ There are many websites with free multimedia resources such as textures, sprites
 
 The links to a few textures that you can start with are: [grass](./_resources/grass.png), [wall](./_resources/wall.png), [guy](./_resources/guy.png).
 
-In SFML, *texture* is the image that is stored in memory, while *sprite* is the shape that will be displayed on the screen and that can be associated with the texture. An additional description of the sprites can be found [here](https://www.sfml-dev.org/tutorials/2.5/graphics-sprite.php)
+In SFML, *texture* is the image that is stored in memory, while *sprite* is the shape that will be displayed on the screen and that can be associated with the texture. An additional description of the sprites can be found [here](https://www.sfml-dev.org/tutorials/3.0/graphics/sprite/)
 
 The simplest way to use texture is to load a bitmap from a file into the `sf::Texture` object, then create the `sf::Sprite` object and associate it with the loaded texture.
 
@@ -215,8 +215,7 @@ if (!texture.loadFromFile("grass.png")) {
     return 1;
 }
 
-sf::Sprite sprite;
-sprite.setTexture(texture);
+sf::Sprite sprite(texture);
 ```
 
 `sf::Sprite` class inherits from `sf::Drawable` and `sf::Transformable` classes, so it contains methods that allow geometric transformations (shifting, rotating, scaling). Moreover, thanks to polymorphism sprites can be stored in one container with shapes such as `sf::RectangleShape`.
@@ -235,9 +234,8 @@ If needed a sprite can display only a fragment of texture associated with it. In
 sf::Texture texture_guy;
 if(!texture_guy.loadFromFile("guy.png")) { return 1; }
 
-sf::Sprite guy;
-guy.setTexture(texture_guy);
-guy.setTextureRect(sf::IntRect(10, 20, 20, 15)); //left, top, width, height
+sf::Sprite guy(texture_guy);
+guy.setTextureRect(sf::IntRect({10, 20}, {20, 15})); //left, top, width, height
 ```
 
 ![head](./_images/05/head.png)
@@ -249,10 +247,9 @@ sf::Texture texture_wall;
 if(!texture_wall.loadFromFile("wall.png")) { return 1; }
 texture_wall.setRepeated(true);
 
-sf::Sprite wall;
-wall.setTexture(texture_wall);
+sf::Sprite wall(texture_wall);
 wall.setScale(0.3, 0.3);
-wall.setTextureRect(sf::IntRect(0, 0, 500, 500));
+wall.setTextureRect(sf::IntRect({0, 0}, {500, 500}));
 ```
 
 ![wall_repeated](./_images/05/wall_repeated.png)
