@@ -32,5 +32,12 @@ The player controls a character moving around one arena and surviving as long as
 ![Dummy screen](./_images/example_dummy_screen.png)
 
 ## Classes diagram
+Below there are two class diagrams. The first one is a simple version with only the main classes and their relationships. The second one is more detailed, showing the main attributes and methods of each class. **Only the first one (simple) is mandatory in the project concept**, the second one is optional, but it is recommended to create it as it helps to clarify the design and implementation of the project.
 
+Both diagrams are not final and can be modified during the implementation phase. They are meant to provide a general overview of the structure of the project and the main components involved. The actual implementation may require additional classes, attributes, or methods that are not shown in these diagrams.
+
+### Simple class diagram
+![Simple class diagram](./_images/simple_diagram.png)
+
+### Detailed class diagram
 ![Class diagram](./_images/example_classes_concept.png)
