@@ -164,7 +164,7 @@ After these changes you should be able to build and run SFML code on Windows wit
 Check if SFML is already installed on your system by running the following command in the terminal:
 
 ```bash
-ls /usr/local/lib | grep sfml
+ls /opt/sfml-3/lib | grep sfml
 ```
 
 if you see files with `sfml` in their name, it means that the library is already installed and you can skip the next step and move to modifying `task.json` and `launch.json` files. If not, you need to install the library first.
@@ -182,8 +182,8 @@ mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
 cmake --build . --config Release --parallel
-sudo cmake --install . --prefix=/usr/local
-ls /usr/local/lib | grep sfml
+sudo cmake --install . --prefix=/opt/sfml-3
+ls /opt/sfml-3/lib | grep sfml
 
 ```
 
@@ -204,10 +204,10 @@ After that, modify `task.json` to include the path to the SFML installation, lik
                 "-o",
                 "${workspaceFolder}/app",
                 "-I",
-                "/user/local/include",
+                "/opt/sfml-3/include",
                 "-L",
-                "/usr/local/lib",
-                "-Wl,-rpath,/usr/local/lib",
+                "/opt/sfml-3/lib",
+                "-Wl,-rpath,/opt/sfml-3/lib",
                 "-lsfml-graphics",
                 "-lsfml-window",
                 "-lsfml-system"
@@ -230,7 +230,7 @@ After that, modify `task.json` to include the path to the SFML installation, lik
 
 ```
 
-Keep in mind that the line `"-Wl,-rpath,/home/put/SFML-3.0.2/lib",` holds user-specific path, so you should change it to match your system if needed. On PCs in the lab, it should be fine with `put` user, but on your personal computer it may be different.
+Keep in mind that the line `"-Wl,-rpath,/opt/sfml-3/lib",` must match the SFML installation path. If you install SFML in a different directory, update the include path, library path, rpath, and `LD_LIBRARY_PATH` accordingly.
 
 Next, modify `launch.json` to include the path to the SFML library:
 
@@ -248,7 +248,7 @@ Next, modify `launch.json` to include the path to the SFML library:
             "environment": [
                 {
                     "name": "LD_LIBRARY_PATH",
-                    "value": "/usr/local/lib:${env:LD_LIBRARY_PATH}"
+                    "value": "/opt/sfml-3/lib:${env:LD_LIBRARY_PATH}"
                 }
             ],
             "externalConsole": false,
